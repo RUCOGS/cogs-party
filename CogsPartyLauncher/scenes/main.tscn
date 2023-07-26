@@ -1,0 +1,263 @@
+[gd_scene load_steps=5 format=3 uid="uid://k31chn02rvs2"]
+
+[ext_resource type="Theme" uid="uid://036n6qd3ik2g" path="res://assets/theme.tres" id="1_erdau"]
+[ext_resource type="Material" uid="uid://b87yd308vxbfo" path="res://assets/rainbow_material.tres" id="2_o310u"]
+[ext_resource type="Texture2D" uid="uid://86474c6ugxyg" path="res://assets/sgj_poster.png" id="3_6h253"]
+[ext_resource type="FontFile" uid="uid://bg4kldgugtb2r" path="res://assets/urbanist/static/Urbanist-Black.ttf" id="4_jhk8j"]
+
+[node name="Main" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_erdau")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = ExtResource("2_o310u")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_6h253")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="HSplitContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HSplitContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HSplitContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HSplitContainer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HSplitContainer/VBoxContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="MarginContainer/HSplitContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_jhk8j")
+theme_override_font_sizes/font_size = 36
+text = "⚙ C O G S   P A R T Y"
+
+[node name="Control" type="Control" parent="MarginContainer/HSplitContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="PlayButton" type="Button" parent="MarginContainer/HSplitContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "P L A Y"
+
+[node name="Control3" type="Control" parent="MarginContainer/HSplitContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HSplitContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Label" type="Label" parent="MarginContainer/HSplitContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_jhk8j")
+text = "G A M E S   F O L D E R"
+
+[node name="MarginContainer" type="HSplitContainer" parent="MarginContainer/HSplitContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+dragger_visibility = 1
+
+[node name="GamesFolderSelectButton" type="Button" parent="MarginContainer/HSplitContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+text = "E D I T"
+
+[node name="FileDialog" type="FileDialog" parent="MarginContainer/HSplitContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton"]
+
+[node name="Label2" type="Label" parent="MarginContainer/HSplitContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "C:/path/to/gamessdfsdf"
+text_overrun_behavior = 3
+
+[node name="Control2" type="Control" parent="MarginContainer/HSplitContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="MarginContainer/HSplitContainer/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+bbcode_enabled = true
+text = "[b]C R E D I T S[/b]
+- Alan Tong (Atlinx)"
+fit_content = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/HSplitContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/HSplitContainer/VBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 30
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 30
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Label" type="Label" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_jhk8j")
+theme_override_font_sizes/font_size = 22
+text = "G A M E S"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 24
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(128, 96)
+layout_mode = 2
+texture = ExtResource("3_6h253")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("4_jhk8j")
+text = "Cool Game"
+
+[node name="Label" type="Label" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_vertical = 3
+text = "the quick brown fox jumps over the lazy dog. the quick brown fox jumps over the lazy dog. the quick brown fox jumps over the lazy dog."
+autowrap_mode = 2
+text_overrun_behavior = 3
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(128, 96)
+layout_mode = 2
+texture = ExtResource("3_6h253")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("4_jhk8j")
+text = "Cool Game"
+
+[node name="Label" type="Label" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer2/VBoxContainer"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_vertical = 3
+text = "the quick brown fox jumps over the lazy dog. the quick brown fox jumps over the lazy dog. the quick brown fox jumps over the lazy dog."
+autowrap_mode = 2
+text_overrun_behavior = 3
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(128, 96)
+layout_mode = 2
+texture = ExtResource("3_6h253")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("4_jhk8j")
+text = "Cool Game"
+
+[node name="Label" type="Label" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer3/VBoxContainer"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_vertical = 3
+text = "the quick brown fox jumps over the lazy dog. the quick brown fox jumps over the lazy dog. the quick brown fox jumps over the lazy dog."
+autowrap_mode = 2
+text_overrun_behavior = 3
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 18
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(128, 96)
+layout_mode = 2
+texture = ExtResource("3_6h253")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("4_jhk8j")
+text = "Cool Game"
+
+[node name="Label" type="Label" parent="MarginContainer/HSplitContainer/VBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/HBoxContainer4/VBoxContainer"]
+custom_minimum_size = Vector2(256, 0)
+layout_mode = 2
+size_flags_vertical = 3
+text = "the quick brown fox jumps over the lazy dog. the quick brown fox jumps over the lazy dog. the quick brown fox jumps over the lazy dog."
+autowrap_mode = 2
+text_overrun_behavior = 3

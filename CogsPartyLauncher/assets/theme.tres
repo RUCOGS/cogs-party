@@ -1,0 +1,8 @@
+[gd_resource type="Theme" load_steps=3 format=3 uid="uid://036n6qd3ik2g"]
+
+[ext_resource type="FontFile" uid="uid://bg4kldgugtb2r" path="res://assets/urbanist/static/Urbanist-Black.ttf" id="1_4qjdl"]
+[ext_resource type="FontFile" uid="uid://cqiy737ukn1g3" path="res://assets/urbanist/static/Urbanist-SemiBold.ttf" id="2_of4dy"]
+
+[resource]
+default_font = ExtResource("2_of4dy")
+RichTextLabel/fonts/bold_font = ExtResource("1_4qjdl")
