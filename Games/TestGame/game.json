@@ -1,0 +1,8 @@
+{
+  "name": "Test Game",
+  "description": "A simple counting game with friends!",
+  "banner": "./banner.png",
+  "date": "7/26/2023",
+  "developers": "Alan",
+  "engine": "Godot"
+}
