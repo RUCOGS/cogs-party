@@ -1,0 +1,48 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct43nyfh03g4k"]
+
+[ext_resource type="Script" path="res://scripts/player_result_panel.gd" id="1_aub1c"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_op22j"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 40.0
+bg_color = Color(0, 0, 0, 0.0862745)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 20
+border_color = Color(1, 0.196078, 0.196078, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="PlayerResultPanel" type="PanelContainer" node_paths=PackedStringArray("player_label", "points_change_label", "points_label")]
+theme_override_styles/panel = SubResource("StyleBoxFlat_op22j")
+script = ExtResource("1_aub1c")
+player_label = NodePath("VBoxContainer/PlayerLabel")
+points_change_label = NodePath("VBoxContainer/PointsChangeLabel")
+points_label = NodePath("VBoxContainer/PointsLabel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="PlayerLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Player 1"
+horizontal_alignment = 1
+
+[node name="PointsChangeLabel" type="Label" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 70)
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 48
+text = "+ 10"
+horizontal_alignment = 1
+
+[node name="PointsLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "3"
+horizontal_alignment = 1

@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://djamoxnpiwy5x"]
+
+[ext_resource type="Script" path="res://scripts/player_panel.gd" id="1_0rjdv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vswej"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0, 0, 0, 0.0862745)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 20
+border_color = Color(1, 0.196078, 0.196078, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="PlayerPanel" type="PanelContainer" node_paths=PackedStringArray("player_label", "points_label", "click_button")]
+anchors_preset = 13
+anchor_left = 0.5
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -120.0
+offset_right = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_vswej")
+script = ExtResource("1_0rjdv")
+player_label = NodePath("VBoxContainer/PlayerLabel")
+points_label = NodePath("VBoxContainer/PointsLabel")
+click_button = NodePath("VBoxContainer/ClickButton")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="PlayerLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Player 1"
+horizontal_alignment = 1
+
+[node name="PointsLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/outline_size = 0
+theme_override_font_sizes/font_size = 48
+text = "50"
+horizontal_alignment = 1
+
+[node name="ClickButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Click Q"
