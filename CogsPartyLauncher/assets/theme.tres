@@ -5,5 +5,4 @@
 
 [resource]
 default_font = ExtResource("2_of4dy")
-default_font_size = 18
 RichTextLabel/fonts/bold_font = ExtResource("1_4qjdl")

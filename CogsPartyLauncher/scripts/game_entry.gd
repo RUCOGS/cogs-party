@@ -14,6 +14,7 @@ signal changed()
 @export var content_container: Control
 @export var enabled_checkbox: CheckBox
 @export var player_count_label: Label
+@export var crossout: Control
 
 
 const SUPPORTED_BUILDS = [
@@ -106,6 +107,8 @@ func _update_ui():
 		else:
 			error_panel.visible = false
 	
+	crossout.visible = not allowed
+	crossout.queue_redraw()
 	if not allowed:
 		content_container.modulate = Color("#b4b4b4")
 		enabled_checkbox.disabled = true

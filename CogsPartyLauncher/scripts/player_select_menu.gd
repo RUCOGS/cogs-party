@@ -20,6 +20,7 @@ func _ready():
 	add_player_button.pressed.connect(_on_add_player_button_pressed)
 	play_button.pressed.connect(_on_play_button_pressed)
 	back_button.pressed.connect(menu_navigator.load_menu.bind("MainMenu"))
+	game_library_display.changed.connect(_on_game_library_display_changed)
 	self.visibility_changed.connect(_on_visible_changed)
 	_update_add_player_button()
 
@@ -74,6 +75,18 @@ func _update_add_player_button():
 	add_player_button.visible = taken_colors.size() < player_colors.size()
 
 
+func _get_enabled_playable_games() -> Array[Dictionary]:
+	return game_library.get_enabled_playable_games(player_settings.size())
+
+
+func _get_playable_games() -> Array[Dictionary]:
+	return game_library.get_playable_games(player_settings.size())
+
+
+func _update_play_button():
+	play_button.disabled = _get_enabled_playable_games().size() == 0
+
+
 func _update_player_settings():
 	_update_taken_colors_set()
 	# Update color options and numbers
@@ -84,13 +97,25 @@ func _update_player_settings():
 
 
 func _update_game_library_display():
-	game_library_display.update(game_library.games, game_library.get_playable_games(player_settings.size()))
+	game_library_display.update(game_library.games, _get_playable_games())
 
 
 func _on_visible_changed():
 	if self.visible:
 		back_button.grab_focus()
 		_update_game_library_display()
+
+
+func _on_player_setting_updated():
+	_update_player_settings()
+
+
+func _on_player_count_changed():
+	_update_player_settings()
+	_update_game_library_display()
+	_update_add_player_button()
+	_update_play_button()
+	
 
 
 func _on_add_player_button_pressed():
@@ -104,13 +129,7 @@ func _on_add_player_button_pressed():
 		_get_next_available_color_or_self()
 	)
 	player_settings.append(inst)
-	_update_player_settings()
-	_update_game_library_display()
-	_update_add_player_button()
-
-
-func _on_player_setting_updated():
-	_update_player_settings()
+	_on_player_count_changed()
 
 
 func _on_player_setting_removed(player_setting: PlayerSetting):
@@ -126,9 +145,11 @@ func _on_player_setting_removed(player_setting: PlayerSetting):
 	player_setting_container.remove_child(player_setting)
 	player_setting.queue_free()
 	player_settings.erase(player_setting)
-	_update_player_settings()
-	_update_game_library_display()
-	_update_add_player_button()
+	_on_player_count_changed()
+
+
+func _on_game_library_display_changed():
+	_update_play_button()
 
 
 func _on_play_button_pressed():

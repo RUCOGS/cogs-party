@@ -2,6 +2,9 @@ extends VBoxContainer
 class_name GameLibraryDisplay
 
 
+signal changed()
+
+
 @export var game_entry_prefab: PackedScene
 @export var game_entry_container: VBoxContainer
 @export var games_label: Label
@@ -23,7 +26,7 @@ func update(_games: Array[Dictionary], _allowed_games = null,):
 	for entry in _games:
 		var inst = game_entry_prefab.instantiate() as GameEntry
 		game_entry_container.add_child(inst)
-		inst.changed.connect(_update_games_label)
+		inst.changed.connect(_on_entry_changed)
 		inst.construct(entry)
 		if allowed_games != null and not entry in allowed_games:
 			inst.allowed = false
@@ -75,3 +78,8 @@ func _update_games_label():
 		games_label.text = "G A M E S   ( %d / %d )" % [allowed_and_enabled_game_count, allowed_game_count]
 	else:
 		games_label.text = "G A M E S   ( %d )" % allowed_and_enabled_game_count
+
+
+func _on_entry_changed():
+	_update_games_label()
+	changed.emit()

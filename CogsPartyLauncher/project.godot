@@ -29,7 +29,7 @@ project/assembly_name="CogsPartyLauncher"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/max_size_container/plugin.cfg")
+enabled=PackedStringArray("res://addons/editor_icon_previewer/plugin.cfg", "res://addons/max_size_container/plugin.cfg")
 
 [rendering]
 

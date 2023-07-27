@@ -95,9 +95,9 @@ func get_playable_games(player_count: int = save_data.players.size()) -> Array[D
 	return playable_games
 
 
-func get_enabled_playable_games() -> Array[Dictionary]:
+func get_enabled_playable_games(player_count: int = save_data.players.size()) -> Array[Dictionary]:
 	var playable_games: Array[Dictionary] = []
-	for game in get_playable_games():
+	for game in get_playable_games(player_count):
 		if game.enabled:
 			playable_games.append(game)
 	return playable_games

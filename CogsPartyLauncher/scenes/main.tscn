@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://k31chn02rvs2"]
+[gd_scene load_steps=22 format=3 uid="uid://k31chn02rvs2"]
 
 [ext_resource type="Theme" uid="uid://036n6qd3ik2g" path="res://assets/theme.tres" id="1_erdau"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_6njpl"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scripts/game_library.gd" id="7_afary"]
 [ext_resource type="Texture2D" uid="uid://uc8pxnfjvsmj" path="res://assets/icon_reload.svg" id="7_ywnar"]
 [ext_resource type="PackedScene" uid="uid://c24hlo57mf44p" path="res://prefabs/player_setting.tscn" id="8_g7i7g"]
+[ext_resource type="Texture2D" uid="uid://c27ucuw3vtgn6" path="res://assets/icon_add.svg" id="9_f0lwm"]
 [ext_resource type="Script" path="res://scripts/lobby_menu.gd" id="9_iaqec"]
 [ext_resource type="PackedScene" uid="uid://ccybwxdqx3qi7" path="res://prefabs/lobby_player.tscn" id="10_ewmxw"]
 [ext_resource type="PackedScene" uid="uid://bp0606lonchki" path="res://prefabs/game_library_display.tscn" id="11_gn2ub"]
@@ -132,7 +133,6 @@ theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
 [node name="PlayerSelectMenu" type="VBoxContainer" parent="Menus" node_paths=PackedStringArray("player_setting_container", "add_player_button", "play_button", "back_button", "game_library", "menu_navigator", "game_library_display")]
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 32
 alignment = 1
@@ -150,6 +150,7 @@ game_library_display = NodePath("HBoxContainer2/GameLibraryDisplay")
 [node name="HBoxContainer2" type="HBoxContainer" parent="Menus/PlayerSelectMenu"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 16
 
 [node name="PanelContainer" type="PanelContainer" parent="Menus/PlayerSelectMenu/HBoxContainer2"]
 layout_mode = 2
@@ -194,7 +195,8 @@ theme_override_fonts/font = ExtResource("4_jhk8j")
 theme_override_styles/normal = SubResource("StyleBoxFlat_5ytcv")
 theme_override_styles/hover = SubResource("StyleBoxFlat_5cgwq")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_5ytcv")
-text = "A D D"
+icon = ExtResource("9_f0lwm")
+icon_alignment = 1
 
 [node name="GameLibraryDisplay" parent="Menus/PlayerSelectMenu/HBoxContainer2" instance=ExtResource("11_gn2ub")]
 layout_mode = 2
@@ -225,6 +227,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_55hvc")
 text = "P L A Y"
 
 [node name="LobbyMenu" type="MarginContainer" parent="Menus" node_paths=PackedStringArray("menu_navigator", "game_library", "game_library_display", "quit_button", "next_button", "lobby_player_container", "lobby_view", "running_game_playing_label", "running_view", "running_game_entry")]
+visible = false
 layout_mode = 2
 script = ExtResource("9_iaqec")
 menu_navigator = NodePath("../../MenuNavigator")
@@ -240,12 +243,12 @@ running_view = NodePath("RunningView")
 running_game_entry = NodePath("RunningView/MarginContainer/VBoxContainer/RunningGameEntry")
 
 [node name="LobbyView" type="VBoxContainer" parent="Menus/LobbyMenu"]
-visible = false
 layout_mode = 2
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Menus/LobbyMenu/LobbyView"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_constants/separation = 16
 
 [node name="PanelContainer" type="PanelContainer" parent="Menus/LobbyMenu/LobbyView/HBoxContainer2"]
 layout_mode = 2
@@ -437,3 +440,4 @@ fit_content = true
 
 [node name="GameLibraryDisplay" parent="Menus/MainMenu" instance=ExtResource("11_gn2ub")]
 layout_mode = 2
+display_mode = true

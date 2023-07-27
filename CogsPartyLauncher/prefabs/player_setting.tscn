@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://c24hlo57mf44p"]
+[gd_scene load_steps=7 format=3 uid="uid://c24hlo57mf44p"]
 
 [ext_resource type="Script" path="res://scripts/player_setting.gd" id="1_6lld3"]
 [ext_resource type="Theme" uid="uid://036n6qd3ik2g" path="res://assets/theme.tres" id="1_cghqm"]
 [ext_resource type="Texture2D" uid="uid://cvnj8l4lspw3d" path="res://assets/icon_arrow_left.svg" id="2_ajqs2"]
 [ext_resource type="Texture2D" uid="uid://dt0bslhmu3sfq" path="res://assets/icon_arrow_right.svg" id="3_pocyf"]
+[ext_resource type="Texture2D" uid="uid://bnna1b7hu12k" path="res://assets/icon_close.svg" id="5_5fgrl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tcaly"]
 content_margin_left = 16.0
@@ -60,4 +61,5 @@ icon = ExtResource("3_pocyf")
 [node name="RemoveButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
-text = "Remove"
+icon = ExtResource("5_5fgrl")
+icon_alignment = 1

@@ -1,9 +1,12 @@
-[gd_scene load_steps=5 format=3 uid="uid://bp0606lonchki"]
+[gd_scene load_steps=6 format=3 uid="uid://bp0606lonchki"]
 
 [ext_resource type="Theme" uid="uid://036n6qd3ik2g" path="res://assets/theme.tres" id="1_7e4nq"]
 [ext_resource type="Script" path="res://scripts/game_library_display.gd" id="1_y4w2o"]
 [ext_resource type="PackedScene" uid="uid://b3fh8hsqlpcp2" path="res://prefabs/game_entry.tscn" id="2_vypkx"]
 [ext_resource type="FontFile" uid="uid://bg4kldgugtb2r" path="res://assets/urbanist/static/Urbanist-Black.ttf" id="3_jyrsh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t3e3d"]
+content_margin_right = 8.0
 
 [node name="GameLibraryDisplay" type="VBoxContainer" node_paths=PackedStringArray("game_entry_container", "games_label")]
 theme = ExtResource("1_7e4nq")
@@ -37,6 +40,7 @@ text = "G A M E S   (1/2)"
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_t3e3d")
 horizontal_scroll_mode = 0
 
 [node name="GameEntryContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]

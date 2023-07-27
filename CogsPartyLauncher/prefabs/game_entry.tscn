@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b3fh8hsqlpcp2"]
+[gd_scene load_steps=7 format=3 uid="uid://b3fh8hsqlpcp2"]
 
 [ext_resource type="Texture2D" uid="uid://86474c6ugxyg" path="res://assets/sgj_poster.png" id="1_asex0"]
 [ext_resource type="Theme" uid="uid://036n6qd3ik2g" path="res://assets/theme.tres" id="1_lafwr"]
 [ext_resource type="Script" path="res://scripts/game_entry.gd" id="1_y8fwy"]
 [ext_resource type="FontFile" uid="uid://bg4kldgugtb2r" path="res://assets/urbanist/static/Urbanist-Black.ttf" id="2_o3hcj"]
+[ext_resource type="Script" path="res://scripts/crossout.gd" id="5_a1qsc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_km0gx"]
 content_margin_left = 8.0
@@ -14,45 +15,49 @@ bg_color = Color(0.996078, 0.372549, 0.372549, 1)
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="GameEntry" type="VBoxContainer" node_paths=PackedStringArray("banner_rect", "title_label", "description_label", "error_panel", "error_panel_label", "content_container", "enabled_checkbox", "player_count_label")]
+[node name="GameEntry" type="VBoxContainer" node_paths=PackedStringArray("banner_rect", "title_label", "description_label", "error_panel", "error_panel_label", "content_container", "enabled_checkbox", "player_count_label", "crossout")]
 offset_right = 410.0
 offset_bottom = 146.0
 size_flags_horizontal = 3
 theme = ExtResource("1_lafwr")
 theme_override_constants/separation = 0
 script = ExtResource("1_y8fwy")
-banner_rect = NodePath("ContentContainer/BannerRect")
-title_label = NodePath("ContentContainer/VBoxContainer/TitleLabel")
-description_label = NodePath("ContentContainer/VBoxContainer/DescriptionLabel")
+banner_rect = NodePath("MarginContainer/ContentContainer/BannerRect")
+title_label = NodePath("MarginContainer/ContentContainer/VBoxContainer/TitleLabel")
+description_label = NodePath("MarginContainer/ContentContainer/VBoxContainer/DescriptionLabel")
 error_panel = NodePath("ErrorPanel")
 error_panel_label = NodePath("ErrorPanel/ErrorPanelLabel")
-content_container = NodePath("ContentContainer")
-enabled_checkbox = NodePath("ContentContainer/VBoxContainer2/EnabledCheckbox")
-player_count_label = NodePath("ContentContainer/VBoxContainer/PlayerCountLabel")
+content_container = NodePath("MarginContainer/ContentContainer")
+enabled_checkbox = NodePath("MarginContainer/ContentContainer/VBoxContainer2/EnabledCheckbox")
+player_count_label = NodePath("MarginContainer/ContentContainer/VBoxContainer/PlayerCountLabel")
+crossout = NodePath("MarginContainer/Crossout")
 
-[node name="ContentContainer" type="HBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+
+[node name="ContentContainer" type="HBoxContainer" parent="MarginContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 18
 
-[node name="BannerRect" type="TextureRect" parent="ContentContainer"]
+[node name="BannerRect" type="TextureRect" parent="MarginContainer/ContentContainer"]
 custom_minimum_size = Vector2(105, 140)
 layout_mode = 2
 texture = ExtResource("1_asex0")
 expand_mode = 1
 stretch_mode = 6
 
-[node name="VBoxContainer" type="VBoxContainer" parent="ContentContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/ContentContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="TitleLabel" type="Label" parent="ContentContainer/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="MarginContainer/ContentContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 1
 theme_override_fonts/font = ExtResource("2_o3hcj")
 text = "Cool Game"
 
-[node name="DescriptionLabel" type="Label" parent="ContentContainer/VBoxContainer"]
+[node name="DescriptionLabel" type="Label" parent="MarginContainer/ContentContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(1, 1, 1, 0.784314)
@@ -60,18 +65,24 @@ text = "the quick brown fox jumps over the lazy dog. the quick brown fox jumps o
 autowrap_mode = 2
 text_overrun_behavior = 3
 
-[node name="PlayerCountLabel" type="Label" parent="ContentContainer/VBoxContainer"]
+[node name="PlayerCountLabel" type="Label" parent="MarginContainer/ContentContainer/VBoxContainer"]
 layout_mode = 2
 text = "4 - 8 Players"
 
-[node name="Control" type="Control" parent="ContentContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="MarginContainer/ContentContainer/VBoxContainer"]
 layout_mode = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="ContentContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/ContentContainer"]
 layout_mode = 2
 
-[node name="EnabledCheckbox" type="CheckBox" parent="ContentContainer/VBoxContainer2"]
+[node name="EnabledCheckbox" type="CheckBox" parent="MarginContainer/ContentContainer/VBoxContainer2"]
 layout_mode = 2
+
+[node name="Crossout" type="Control" parent="MarginContainer"]
+visible = false
+self_modulate = Color(1, 0.34902, 0.34902, 1)
+layout_mode = 2
+script = ExtResource("5_a1qsc")
 
 [node name="ErrorPanel" type="PanelContainer" parent="."]
 layout_mode = 2
