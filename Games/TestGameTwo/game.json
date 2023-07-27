@@ -1,12 +1,12 @@
 {
-  "title": "Test Game",
-  "description": "A simple counting game with friends!",
+  "title": "Test Game Two",
+  "description": "Another simple counting game with friends!",
   "banner": "./banner.png",
   "date": "7/26/2023",
   "developers": ["Alan"],
   "engine": "Godot",
-  "min_players": 2,
-  "max_players": 4,
+  "min_players": 1,
+  "max_players": 3,
   "builds": {
     "windows": "./windows/TestGame.exe",
     "macos": "./windows/TestGame.exe"

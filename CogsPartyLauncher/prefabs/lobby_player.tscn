@@ -1,0 +1,44 @@
+[gd_scene load_steps=4 format=3 uid="uid://ccybwxdqx3qi7"]
+
+[ext_resource type="Script" path="res://scripts/lobby_player.gd" id="1_ae42d"]
+[ext_resource type="Theme" uid="uid://036n6qd3ik2g" path="res://assets/theme.tres" id="1_hd1ud"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tcaly"]
+content_margin_left = 16.0
+content_margin_top = 18.0
+content_margin_right = 16.0
+content_margin_bottom = 20.0
+bg_color = Color(0, 0, 0, 0.317647)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 9
+border_color = Color(0.976471, 0.235294, 0.235294, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[node name="LobbyPlayer" type="PanelContainer" node_paths=PackedStringArray("player_name_label", "points_label")]
+custom_minimum_size = Vector2(150, 150)
+theme = ExtResource("1_hd1ud")
+theme_override_styles/panel = SubResource("StyleBoxFlat_tcaly")
+script = ExtResource("1_ae42d")
+player_name_label = NodePath("VBoxContainer/PlayerNameLabel")
+points_label = NodePath("VBoxContainer/PointsLabel")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="PlayerNameLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "P1"
+horizontal_alignment = 1
+
+[node name="PointsLabel" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 64
+text = "30"
+horizontal_alignment = 1

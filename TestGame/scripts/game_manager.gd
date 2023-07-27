@@ -11,6 +11,9 @@ class_name GameManager
 @export var time_label: Label
 @export var player_panel_container: HBoxContainer
 @export var player_panel_prefab: PackedScene
+@export var player_results_overlay: Control
+@export var player_result_panel_container: HBoxContainer
+@export var player_result_panel_prefab: PackedScene
 @export var mini_game_manager: MiniGameManager
 @export var duration: float = 10
 
@@ -33,9 +36,12 @@ var player_panels: Array
 func _ready():
 	mini_game_manager.game_started.connect(_on_game_started)
 	time_label.text = str(duration)
+	countdown_overlay.visible = false
+	player_results_overlay.visible = false
 
 
 func _on_game_started(players: Array):
+	get_tree().paused = true
 	time = duration
 	time_label.text = str(duration)
 	for player in players:
@@ -51,7 +57,8 @@ func _on_game_started(players: Array):
 	countdown_label.text = "START"
 	await get_tree().create_timer(1).timeout
 	countdown_overlay.visible = false
-		
+	get_tree().paused = false
+	
 	game_started = true
 
 
@@ -66,13 +73,14 @@ func _process(delta):
 
 
 func _sort_player_panel_descending(a: PlayerPanel, b: PlayerPanel):
-	if a.score < b.score:
+	if a.points < b.points:
 		return false
 	return true
 
 
 func _end_game():
 	game_started = false
+	get_tree().paused = true
 
 	var top_players = player_panels.duplicate();
 	top_players.sort_custom(_sort_player_panel_descending)		
@@ -80,10 +88,9 @@ func _end_game():
 	var results = []
 	var i = 0
 	var prev_player = null
-	for _player in top_players:
-		var player: PlayerPanel = _player
+	for player in top_players:
 		if prev_player != null:
-			if prev_player.score != player.score:
+			if prev_player.points != player.points:
 				i += 1
 			if i >= player_reward_points.size():
 				break
@@ -91,6 +98,23 @@ func _end_game():
 			player.player_data.number, 
 			player_reward_points[i]
 		))
-		prev_player = _player
+		prev_player = player
+	
+	mini_game_manager.apply_results(results)
+	
+	for player in mini_game_manager.get_players():
+		var panel_inst = player_result_panel_prefab.instantiate() as PlayerResultPanel
+		player_result_panel_container.add_child(panel_inst)
+		# Find the player's point change
+		var point_change = 0
+		for result in results:
+			if result.player == player.number:
+				point_change = result.points
+				break
 		
-	mini_game_manager.end_game(results)
+		panel_inst.construct(player, point_change)
+	player_results_overlay.visible = true
+	
+	await get_tree().create_timer(5).timeout
+		
+	mini_game_manager.end_game()

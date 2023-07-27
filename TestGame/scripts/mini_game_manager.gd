@@ -64,6 +64,7 @@ const DUMMY_SAVE_DATA: Dictionary = {
 var save_file_path: String = ""
 ## The data of the asve file
 var save_file_data: Dictionary = {}
+var applied_results: bool = false
 
 ## Our minigame's name
 @export var game_name: String = "Test Game"
@@ -74,6 +75,11 @@ var save_file_data: Dictionary = {}
 ## Holds information about a player 
 class PlayerData:
 	## Player's number
+	##
+	## This number starts from 1 and goes up as there are more players
+	## Ex. 	2 player game has players numbered 1, and 2
+	##		3 player game has players numbered 1, 2, and 3
+	##		4 player game has players numbered 1, 2, 3, and 4
 	var number: int
 	## Player's color
 	var color: String
@@ -114,6 +120,31 @@ func get_players() -> Array:
 	return players
 
 
+## Applies the results to the save data.
+##
+## This can only be done once during the entire game, and is
+#e usually done at the end.
+func apply_results(results: Array):
+	if applied_results:
+		push_error("Cannot add results twice!")
+		return
+	applied_results = true
+	var final_results = []
+	for result in results:
+		if result is PlayerResultData:
+			final_results.append(result.to_dict())
+		else:
+			final_results.append(result)
+	
+	save_file_data["games"].append({
+		"name": game_name,
+		"results": final_results
+	})
+	
+	for result in final_results:
+		save_file_data["players"][result.player].points += result.points
+
+
 ## Ends the game with some results 
 ## 
 ## `results` is an array that stores an array of PlayerResultData.
@@ -130,27 +161,17 @@ func get_players() -> Array:
 ## 	  	  "points": 3
 ## 	  },
 ## ]
-func end_game(results: Array):
-	var final_results = []
-	for result in results:
-		if result is PlayerResultData:
-			final_results.append(result.to_dict())
-		else:
-			final_results.append(result)
-	
-	save_file_data["games"].append({
-		"name": game_name,
-		"results": final_results
-	})
-	
-	for result in final_results:
-		save_file_data["players"][result.player].points += result.points
+func end_game(results = null):
+	if results != null:
+		apply_results(results)
 	
 	if save_file_path != "":
 		var file = FileAccess.open(save_file_path, FileAccess.WRITE)
-		if file == null:
-			printerr("Could not write to save file.")
+		if file:
 			file.store_string(JSON.stringify(save_file_data, "  "))
+			file.close()
+		else:
+			printerr("Could not write to save file.")
 	else:
 		push_warning("No file saved because we're using a dummy data...")
 		print("Ending game with save_file_data:\n%s" % JSON.stringify(save_file_data, "  "))
@@ -158,6 +179,8 @@ func end_game(results: Array):
 
 
 func _ready():
+	DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+	
 	await get_tree().process_frame
 	_parse_cmd_args()
 	
@@ -181,4 +204,9 @@ func _parse_cmd_args():
 		if file == null:
 			push_error("Could not read save file.")
 			return
+		var json_result = JSON.parse_string(file.get_as_text())
+		if json_result == null:
+			push_error("Could not parse json.")
+			return
+		save_file_data = json_result
 		file.close();

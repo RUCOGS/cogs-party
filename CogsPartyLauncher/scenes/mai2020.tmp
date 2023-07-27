@@ -98,14 +98,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_erdau")
 
 [node name="GameLibrary" type="Node" parent="."]
 script = ExtResource("7_afary")
 
 [node name="MenuNavigator" type="Node" parent="." node_paths=PackedStringArray("menus")]
 script = ExtResource("2_84tmd")
-menus = [NodePath("../Menus/MainMenu"), NodePath("../Menus/PlayerSelectMenu"), NodePath("../Menus/LobbyMenu")]
+menus = [NodePath("../Menus/MainMenu"), NodePath("../Menus/PlayerSelectMenu")]
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = ExtResource("2_o310u")

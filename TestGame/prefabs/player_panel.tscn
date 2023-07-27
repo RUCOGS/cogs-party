@@ -18,7 +18,7 @@ corner_radius_top_right = 8
 corner_radius_bottom_right = 8
 corner_radius_bottom_left = 8
 
-[node name="PlayerPanel" type="PanelContainer" node_paths=PackedStringArray("player_label", "score_label", "click_button")]
+[node name="PlayerPanel" type="PanelContainer" node_paths=PackedStringArray("player_label", "points_label", "click_button")]
 anchors_preset = 13
 anchor_left = 0.5
 anchor_right = 0.5
@@ -30,7 +30,7 @@ grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_vswej")
 script = ExtResource("1_0rjdv")
 player_label = NodePath("VBoxContainer/PlayerLabel")
-score_label = NodePath("VBoxContainer/ScoreLabel")
+points_label = NodePath("VBoxContainer/PointsLabel")
 click_button = NodePath("VBoxContainer/ClickButton")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
@@ -42,7 +42,7 @@ layout_mode = 2
 text = "Player 1"
 horizontal_alignment = 1
 
-[node name="ScoreLabel" type="Label" parent="VBoxContainer"]
+[node name="PointsLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 48

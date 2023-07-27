@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://k31chn02rvs2"]
+[gd_scene load_steps=18 format=3 uid="uid://k31chn02rvs2"]
 
 [ext_resource type="Theme" uid="uid://036n6qd3ik2g" path="res://assets/theme.tres" id="1_erdau"]
 [ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_6njpl"]
@@ -6,13 +6,10 @@
 [ext_resource type="Material" uid="uid://b87yd308vxbfo" path="res://assets/rainbow_material.tres" id="2_o310u"]
 [ext_resource type="Texture2D" uid="uid://86474c6ugxyg" path="res://assets/sgj_poster.png" id="3_6h253"]
 [ext_resource type="FontFile" uid="uid://bg4kldgugtb2r" path="res://assets/urbanist/static/Urbanist-Black.ttf" id="4_jhk8j"]
-[ext_resource type="PackedScene" uid="uid://b3fh8hsqlpcp2" path="res://prefabs/game_entry.tscn" id="6_eeign"]
 [ext_resource type="Script" path="res://scripts/player_select_menu.gd" id="6_v4hmo"]
 [ext_resource type="Script" path="res://scripts/game_library.gd" id="7_afary"]
 [ext_resource type="Texture2D" uid="uid://uc8pxnfjvsmj" path="res://assets/icon_reload.svg" id="7_ywnar"]
 [ext_resource type="PackedScene" uid="uid://c24hlo57mf44p" path="res://prefabs/player_setting.tscn" id="8_g7i7g"]
-[ext_resource type="Script" path="res://scripts/lobby_menu.gd" id="9_iaqec"]
-[ext_resource type="PackedScene" uid="uid://ccybwxdqx3qi7" path="res://prefabs/lobby_player.tscn" id="10_ewmxw"]
 [ext_resource type="PackedScene" uid="uid://bp0606lonchki" path="res://prefabs/game_library_display.tscn" id="11_gn2ub"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ytcv"]
@@ -98,14 +95,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_erdau")
 
 [node name="GameLibrary" type="Node" parent="."]
 script = ExtResource("7_afary")
 
 [node name="MenuNavigator" type="Node" parent="." node_paths=PackedStringArray("menus")]
 script = ExtResource("2_84tmd")
-menus = [NodePath("../Menus/MainMenu"), NodePath("../Menus/PlayerSelectMenu"), NodePath("../Menus/LobbyMenu")]
+menus = [NodePath("../Menus/MainMenu"), NodePath("../Menus/PlayerSelectMenu")]
 
 [node name="TextureRect" type="TextureRect" parent="."]
 material = ExtResource("2_o310u")
@@ -196,8 +192,9 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_5cgwq")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_5ytcv")
 text = "A D D"
 
-[node name="GameLibraryDisplay" parent="Menus/PlayerSelectMenu/HBoxContainer2" instance=ExtResource("11_gn2ub")]
+[node name="GameLibraryDisplay" parent="Menus/PlayerSelectMenu/HBoxContainer2" node_paths=PackedStringArray("game_library") instance=ExtResource("11_gn2ub")]
 layout_mode = 2
+game_library = NodePath("../../../../GameLibrary")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Menus/PlayerSelectMenu"]
 layout_mode = 2
@@ -224,121 +221,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_jel6n")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_55hvc")
 text = "P L A Y"
 
-[node name="LobbyMenu" type="MarginContainer" parent="Menus" node_paths=PackedStringArray("menu_navigator", "game_library", "game_library_display", "quit_button", "next_button", "lobby_player_container", "lobby_view", "running_game_playing_label", "running_view", "running_game_entry")]
-layout_mode = 2
-script = ExtResource("9_iaqec")
-menu_navigator = NodePath("../../MenuNavigator")
-game_library = NodePath("../../GameLibrary")
-game_library_display = NodePath("LobbyView/HBoxContainer2/GameLibraryDisplay")
-quit_button = NodePath("LobbyView/HBoxContainer/QuitButton")
-next_button = NodePath("LobbyView/HBoxContainer/NextButton")
-lobby_player_prefab = ExtResource("10_ewmxw")
-lobby_player_container = NodePath("LobbyView/HBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/LobbyPlayerContainer")
-lobby_view = NodePath("LobbyView")
-running_game_playing_label = NodePath("RunningView/MarginContainer/VBoxContainer/PlayingLabel")
-running_view = NodePath("RunningView")
-running_game_entry = NodePath("RunningView/MarginContainer/VBoxContainer/RunningGameEntry")
-
-[node name="LobbyView" type="VBoxContainer" parent="Menus/LobbyMenu"]
-visible = false
-layout_mode = 2
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="Menus/LobbyMenu/LobbyView"]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="PanelContainer" type="PanelContainer" parent="Menus/LobbyMenu/LobbyView/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="MarginContainer" type="MarginContainer" parent="Menus/LobbyMenu/LobbyView/HBoxContainer2/PanelContainer"]
-layout_mode = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Menus/LobbyMenu/LobbyView/HBoxContainer2/PanelContainer/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 32
-
-[node name="PlayersLabel" type="Label" parent="Menus/LobbyMenu/LobbyView/HBoxContainer2/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_jhk8j")
-theme_override_font_sizes/font_size = 22
-text = "P L A Y E R S"
-horizontal_alignment = 1
-
-[node name="ScrollContainer" type="ScrollContainer" parent="Menus/LobbyMenu/LobbyView/HBoxContainer2/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-horizontal_scroll_mode = 0
-
-[node name="LobbyPlayerContainer" type="HFlowContainer" parent="Menus/LobbyMenu/LobbyView/HBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_constants/h_separation = 16
-theme_override_constants/v_separation = 16
-alignment = 1
-
-[node name="GameLibraryDisplay" parent="Menus/LobbyMenu/LobbyView/HBoxContainer2" instance=ExtResource("11_gn2ub")]
-layout_mode = 2
-display_mode = true
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Menus/LobbyMenu/LobbyView"]
-layout_mode = 2
-
-[node name="QuitButton" type="Button" parent="Menus/LobbyMenu/LobbyView/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-theme_override_styles/normal = SubResource("StyleBoxFlat_6kyxl")
-theme_override_styles/hover = SubResource("StyleBoxFlat_shf47")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_6kyxl")
-text = "Q U I T"
-
-[node name="Control" type="Control" parent="Menus/LobbyMenu/LobbyView/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="NextButton" type="Button" parent="Menus/LobbyMenu/LobbyView/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_font_sizes/font_size = 36
-theme_override_styles/normal = SubResource("StyleBoxFlat_55hvc")
-theme_override_styles/hover = SubResource("StyleBoxFlat_jel6n")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_55hvc")
-text = "N E X T"
-
-[node name="RunningView" type="PanelContainer" parent="Menus/LobbyMenu"]
-custom_minimum_size = Vector2(600, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="MarginContainer" type="MarginContainer" parent="Menus/LobbyMenu/RunningView"]
-layout_mode = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Menus/LobbyMenu/RunningView/MarginContainer"]
-layout_mode = 2
-
-[node name="PlayingLabel" type="Label" parent="Menus/LobbyMenu/RunningView/MarginContainer/VBoxContainer"]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "P L A Y I N G"
-
-[node name="RunningGameEntry" parent="Menus/LobbyMenu/RunningView/MarginContainer/VBoxContainer" instance=ExtResource("6_eeign")]
-layout_mode = 2
-display_mode = true
-
 [node name="MainMenu" type="HBoxContainer" parent="Menus" node_paths=PackedStringArray("play_button", "games_folder_select_button", "games_folder_select_file_dialog", "games_folder_label", "game_library", "menu_navigator", "game_library_display", "refresh_games_button")]
-visible = false
 layout_mode = 2
 theme = ExtResource("1_erdau")
 theme_override_constants/separation = 16
@@ -435,5 +318,6 @@ text = "[b]C R E D I T S[/b]
 - Alan Tong (Atlinx)"
 fit_content = true
 
-[node name="GameLibraryDisplay" parent="Menus/MainMenu" instance=ExtResource("11_gn2ub")]
+[node name="GameLibraryDisplay" parent="Menus/MainMenu" node_paths=PackedStringArray("game_library") instance=ExtResource("11_gn2ub")]
 layout_mode = 2
+game_library = NodePath("../../../GameLibrary")
