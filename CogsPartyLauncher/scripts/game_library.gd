@@ -3,7 +3,7 @@ class_name GameLibrary
 
 
 signal game_started(game: Dictionary)
-signal game_ended(results: Dictionary)
+signal game_ended(results)
 
 
 const GAME_FILE_NAME = "game.json"
@@ -39,10 +39,16 @@ func _process(delta):
 			var code = running_game_thread.wait_to_finish()
 			if code != 0:
 				push_error("Game exited with unxpected code: %d." % code)
+			var old_data = save_data
 			reread_save_file()
 			running_game_thread = null
-			var games: Array = save_data.games
-			var latest_result = games[games.size() - 1];
+			
+			var latest_result = null
+			# Make sure a new game result has been added before 
+			# attempted to emit the last result
+			if old_data.games.size() < save_data.games.size():
+				var games: Array = save_data.games
+				latest_result = games[games.size() - 1];
 			game_ended.emit(latest_result)
 
 

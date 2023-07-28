@@ -1,0 +1,13 @@
+{
+  "title": "Godot Test Game",
+  "description": "A simple counting game with friends written in Godot!",
+  "banner": "./banner.png",
+  "date": "7/26/2023",
+  "developers": ["Alan"],
+  "engine": "Godot",
+  "min_players": 2,
+  "max_players": 4,
+  "builds": {
+    "windows": "./windows/GodotTestGame.exe"
+  }
+}

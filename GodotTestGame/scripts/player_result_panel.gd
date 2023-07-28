@@ -17,6 +17,6 @@ func construct(player_data: MiniGameManager.PlayerData, score_change: int):
 	points_label.text = str(player_data.points)
 	
 	var panel = get_theme_stylebox("panel").duplicate(true) as StyleBoxFlat;
-	panel.border_color = Color(player_data.color)
+	panel.border_color = player_data.color
 	add_theme_stylebox_override("panel", panel)
 	

@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://djamoxnpiwy5x"]
+[gd_scene load_steps=4 format=3 uid="uid://djamoxnpiwy5x"]
 
 [ext_resource type="Script" path="res://scripts/player_panel.gd" id="1_0rjdv"]
+[ext_resource type="Theme" uid="uid://d3krvxh6kay5r" path="res://assets/theme.tres" id="1_v4elw"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vswej"]
 content_margin_left = 20.0
@@ -27,6 +28,7 @@ offset_left = -120.0
 offset_right = 120.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_v4elw")
 theme_override_styles/panel = SubResource("StyleBoxFlat_vswej")
 script = ExtResource("1_0rjdv")
 player_label = NodePath("VBoxContainer/PlayerLabel")
@@ -44,7 +46,6 @@ horizontal_alignment = 1
 
 [node name="PointsLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_constants/outline_size = 0
 theme_override_font_sizes/font_size = 48
 text = "50"
 horizontal_alignment = 1

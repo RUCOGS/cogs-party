@@ -82,11 +82,11 @@ class PlayerData:
 	##		4 player game has players numbered 1, 2, 3, and 4
 	var number: int
 	## Player's color
-	var color: String
+	var color: Color
 	## Player's Current points
 	var points: int
 	
-	func _init(_number: int, _color: String, _points: int):
+	func _init(_number: int, _color: Color, _points: int):
 		number = _number
 		color = _color
 		points = _points
@@ -115,7 +115,7 @@ func get_players() -> Array:
 	var players = [];
 	var i = 1
 	for dict in save_file_data["players"]:
-		players.append(PlayerData.new(i, dict.color, dict.points))
+		players.append(PlayerData.new(i, Color(dict.color), dict.points))
 		i += 1
 	return players
 
@@ -162,6 +162,8 @@ func apply_results(results: Array):
 ## 	  },
 ## ]
 func end_game(results = null):
+	game_ended.emit()
+	
 	if results != null:
 		apply_results(results)
 	
@@ -173,7 +175,7 @@ func end_game(results = null):
 		else:
 			printerr("Could not write to save file.")
 	else:
-		push_warning("No file saved because we're using a dummy data...")
+		push_warning("No file saved because we're using dummy data...")
 		print("Ending game with save_file_data:\n%s" % JSON.stringify(save_file_data, "  "))
 	get_tree().quit()
 

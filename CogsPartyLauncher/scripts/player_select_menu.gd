@@ -156,7 +156,7 @@ func _on_play_button_pressed():
 	var players: Array[Dictionary] = []
 	for player_setting in player_settings:
 		players.append({
-			"color": player_setting.player_color.to_html(false),
+			"color": "#" + player_setting.player_color.to_html(false),
 			"points": 0
 		})
 	

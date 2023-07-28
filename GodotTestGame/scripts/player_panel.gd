@@ -33,8 +33,8 @@ func construct(player_data: MiniGameManager.PlayerData):
 	player_keybind = PLAYER_KEYBINDS[player_data.number]
 	click_button.text = "Click %s" % char(player_keybind).to_upper()
 	
-	var panel = get_theme_stylebox("panel").duplicate(true) as StyleBoxFlat;
-	panel.border_color = Color(player_data.color)
+	var panel = get_theme_stylebox("panel").duplicate(true) as StyleBoxFlat
+	panel.border_color = player_data.color
 	add_theme_stylebox_override("panel", panel)
 	
 	points = 0
@@ -42,13 +42,12 @@ func construct(player_data: MiniGameManager.PlayerData):
 
 
 func _ready():
-	player_label.text = "asdf"
 	click_button.button_up.connect(_on_button_click)
 
 
 func _unhandled_input(event):
 	if event is InputEventKey:
-		if event.pressed and event.keycode == player_keybind:
+		if not event.pressed and event.keycode == player_keybind:
 			_on_button_click()
 
 

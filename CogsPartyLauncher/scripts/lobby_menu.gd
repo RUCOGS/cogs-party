@@ -67,10 +67,11 @@ func _on_next_button_pressed():
 	game_library.launch_game(game)
 
 
-func _on_game_ended(results: Dictionary):
+func _on_game_ended(results):
 	lobby_view.visible = true
 	running_view.visible = false
 	
-	for lobby_player in lobby_players:
-		var player_data = game_library.save_data.players[lobby_player.player_number - 1]
-		lobby_player.player_points = player_data.points
+	if results != null and results is Dictionary:
+		for lobby_player in lobby_players:
+			var player_data = game_library.save_data.players[lobby_player.player_number - 1]
+			lobby_player.player_points = player_data.points

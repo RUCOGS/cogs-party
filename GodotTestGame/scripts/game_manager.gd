@@ -1,4 +1,4 @@
-extends Control
+extends Node
 class_name GameManager
 ## GameManager manages the actual gameplay part of the minigame.
 ## 
@@ -44,6 +44,11 @@ func _on_game_started(players: Array):
 	get_tree().paused = true
 	time = duration
 	time_label.text = str(duration)
+	
+	for panel in player_panel_container.get_children():
+		player_panel_container.remove_child(panel)
+		panel.queue_free()
+	
 	for player in players:
 		var panel_inst = player_panel_prefab.instantiate() as PlayerPanel;
 		player_panel_container.add_child(panel_inst)
@@ -101,6 +106,11 @@ func _end_game():
 		prev_player = player
 	
 	mini_game_manager.apply_results(results)
+	
+	
+	for panel in player_result_panel_container.get_children():
+		player_result_panel_container.remove_child(panel)
+		panel.queue_free()
 	
 	for player in mini_game_manager.get_players():
 		var panel_inst = player_result_panel_prefab.instantiate() as PlayerResultPanel
