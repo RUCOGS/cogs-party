@@ -2,6 +2,7 @@ extends HBoxContainer
 
 
 @export var play_button: Button
+@export var quit_game_button: Button
 @export var games_folder_select_button: Button
 @export var games_folder_select_file_dialog: FileDialog 
 @export var games_folder_label: Label
@@ -22,6 +23,7 @@ func _ready():
 	games_folder_select_button.pressed.connect(_on_games_folder_select_pressed)
 	games_folder_select_file_dialog.dir_selected.connect(_on_games_folder_selected)
 	refresh_games_button.pressed.connect(_on_refresh_games_button_pressed)
+	quit_game_button.pressed.connect(func(): get_tree().quit())
 	self.visibility_changed.connect(_on_visible_changed)
 	
 	_on_visible_changed()

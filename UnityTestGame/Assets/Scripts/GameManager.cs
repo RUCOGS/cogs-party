@@ -96,7 +96,7 @@ namespace Game
             _gameStarted = false;
             _pauseControl.SetPause(true);
 
-            _playerPanels.Sort((a, b) => a.Points - b.Points);
+            _playerPanels.Sort((a, b) => b.Points - a.Points);
 
             var results = new List<PlayerResult>();
             PlayerPanel prevPlayerPanel = null;

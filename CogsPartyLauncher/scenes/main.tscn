@@ -133,6 +133,7 @@ theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
 [node name="PlayerSelectMenu" type="VBoxContainer" parent="Menus" node_paths=PackedStringArray("player_setting_container", "add_player_button", "play_button", "back_button", "game_library", "menu_navigator", "game_library_display")]
+visible = false
 layout_mode = 2
 theme_override_constants/separation = 32
 alignment = 1
@@ -244,6 +245,7 @@ running_game_entry = NodePath("RunningView/MarginContainer/VBoxContainer/Running
 
 [node name="LobbyView" type="VBoxContainer" parent="Menus/LobbyMenu"]
 layout_mode = 2
+theme_override_constants/separation = 32
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Menus/LobbyMenu/LobbyView"]
 layout_mode = 2
@@ -316,6 +318,7 @@ theme_override_styles/pressed = SubResource("StyleBoxFlat_55hvc")
 text = "N E X T"
 
 [node name="RunningView" type="PanelContainer" parent="Menus/LobbyMenu"]
+visible = false
 custom_minimum_size = Vector2(600, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -340,13 +343,13 @@ text = "P L A Y I N G"
 layout_mode = 2
 display_mode = true
 
-[node name="MainMenu" type="HBoxContainer" parent="Menus" node_paths=PackedStringArray("play_button", "games_folder_select_button", "games_folder_select_file_dialog", "games_folder_label", "game_library", "menu_navigator", "game_library_display", "refresh_games_button")]
-visible = false
+[node name="MainMenu" type="HBoxContainer" parent="Menus" node_paths=PackedStringArray("play_button", "quit_game_button", "games_folder_select_button", "games_folder_select_file_dialog", "games_folder_label", "game_library", "menu_navigator", "game_library_display", "refresh_games_button")]
 layout_mode = 2
 theme = ExtResource("1_erdau")
 theme_override_constants/separation = 16
 script = ExtResource("2_6njpl")
 play_button = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/PlayButton")
+quit_game_button = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/QuitButton")
 games_folder_select_button = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton")
 games_folder_select_file_dialog = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog")
 games_folder_label = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderLabel")
@@ -387,6 +390,10 @@ layout_mode = 2
 [node name="PlayButton" type="Button" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
 text = "P L A Y"
+
+[node name="QuitButton" type="Button" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Q U I T"
 
 [node name="Control3" type="Control" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 20)
@@ -431,12 +438,17 @@ icon = ExtResource("7_ywnar")
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 layout_mode = 2
-bbcode_enabled = true
-text = "[b]C R E D I T S[/b]
-- Alan Tong (Atlinx)"
-fit_content = true
+
+[node name="CreditsTitle" type="Label" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_jhk8j")
+text = "C R E D I T S"
+
+[node name="CreditsLabel" type="Label" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+text = "- Alan Tong (Atlinx)"
 
 [node name="GameLibraryDisplay" parent="Menus/MainMenu" instance=ExtResource("11_gn2ub")]
 layout_mode = 2

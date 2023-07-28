@@ -15,6 +15,7 @@ var running_game_thread: Thread
 var game_thread_poll_interval: float = 1
 var game_thread_poll_time: float = 0
 var save_data = null
+var previous_game = null
 
 
 func _ready():
@@ -116,8 +117,15 @@ func get_random_enabled_playable_game():
 	var playable_games = get_enabled_playable_games()
 	if playable_games.size() == 0:
 		return null
-	return playable_games[randi() % playable_games.size()]
-
+	print("enabled playable games: ", playable_games);
+	var game = playable_games[randi() % playable_games.size()]
+	if previous_game == game and playable_games.size() > 1:
+		var other_games = playable_games.duplicate()
+		other_games.erase(previous_game)
+		game = other_games[randi() % other_games.size()]
+	previous_game = game
+	return game
+	
 
 func reread_save_file():
 	var save_file = FileAccess.open(SAVE_FILE_PATH, FileAccess.READ)

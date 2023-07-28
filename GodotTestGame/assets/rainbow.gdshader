@@ -31,10 +31,6 @@ void fragment() {
 		rainbow = vec3(1., 0., x);
 	}
 	vec4 color = texture(TEXTURE, UV);
-	
-	float size = 0.5;
-	
 	float final_strength = ease_in(UV.x) * strength;
-	
 	COLOR = color + vec4(rainbow, color.a) * final_strength;
 }
