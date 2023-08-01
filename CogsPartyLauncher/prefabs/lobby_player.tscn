@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://ccybwxdqx3qi7"]
+[gd_scene load_steps=5 format=3 uid="uid://ccybwxdqx3qi7"]
 
 [ext_resource type="Script" path="res://scripts/lobby_player.gd" id="1_ae42d"]
 [ext_resource type="Theme" uid="uid://036n6qd3ik2g" path="res://assets/theme.tres" id="1_hd1ud"]
+[ext_resource type="FontFile" uid="uid://bg4kldgugtb2r" path="res://assets/urbanist/static/Urbanist-Black.ttf" id="3_c7u4k"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tcaly"]
 content_margin_left = 16.0
@@ -19,22 +20,56 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[node name="LobbyPlayer" type="PanelContainer" node_paths=PackedStringArray("player_name_label", "points_label")]
+[node name="LobbyPlayer" type="PanelContainer" node_paths=PackedStringArray("player_name_label", "points_label", "x_button_test", "a_button_test")]
 custom_minimum_size = Vector2(150, 150)
 theme = ExtResource("1_hd1ud")
 theme_override_styles/panel = SubResource("StyleBoxFlat_tcaly")
 script = ExtResource("1_ae42d")
-player_name_label = NodePath("VBoxContainer/PlayerNameLabel")
+player_name_label = NodePath("VBoxContainer/HBoxContainer/PlayerNameLabel")
 points_label = NodePath("VBoxContainer/PointsLabel")
+x_button_test = NodePath("VBoxContainer/HBoxContainer/XButtonTest")
+a_button_test = NodePath("VBoxContainer/HBoxContainer/AButtonTest")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 2
 
-[node name="PlayerNameLabel" type="Label" parent="VBoxContainer"]
+[node name="HBoxContainer" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 2
+
+[node name="PlayerNameLabel" type="Label" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+offset_right = 118.0
+offset_bottom = 32.0
+size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 24
 text = "P1"
 horizontal_alignment = 1
+
+[node name="AButtonTest" type="Label" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -32.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.482353, 0.796078, 0.384314, 1)
+theme_override_fonts/font = ExtResource("3_c7u4k")
+theme_override_font_sizes/font_size = 24
+text = "(A)"
+horizontal_alignment = 2
+
+[node name="XButtonTest" type="Label" parent="VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 1
+offset_right = 35.0
+offset_bottom = 32.0
+theme_override_colors/font_color = Color(0.203922, 0.654902, 0.952941, 1)
+theme_override_fonts/font = ExtResource("3_c7u4k")
+theme_override_font_sizes/font_size = 24
+text = "(X)"
 
 [node name="PointsLabel" type="Label" parent="VBoxContainer"]
 layout_mode = 2

@@ -81,13 +81,20 @@ class PlayerData:
 	##		3 player game has players numbered 1, 2, and 3
 	##		4 player game has players numbered 1, 2, 3, and 4
 	var number: int
+	## Player's index
+	##
+	## this number starts from 0 and goes up as there are more players
+	## Ex.  2 player game has players with indicies 0, and 1
+	##		3 player game has players with indicies 0, 1, and 2
+	var index: int
 	## Player's color
 	var color: Color
 	## Player's Current points
 	var points: int
 	
-	func _init(_number: int, _color: Color, _points: int):
-		number = _number
+	func _init(_index: int, _color: Color, _points: int):
+		index = _index;
+		number = _index + 1
 		color = _color
 		points = _points
 
@@ -113,7 +120,7 @@ class PlayerResultData:
 # Returns an array of PlayerData
 func get_players() -> Array:
 	var players = [];
-	var i = 1
+	var i = 0
 	for dict in save_file_data["players"]:
 		players.append(PlayerData.new(i, Color(dict.color), dict.points))
 		i += 1

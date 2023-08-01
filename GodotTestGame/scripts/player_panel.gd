@@ -12,6 +12,7 @@ class_name PlayerPanel
 
 var player_data: MiniGameManager.PlayerData
 var player_keybind: int
+var player_joypad_device: int = -1
 var points: int
 
 const PLAYER_KEYBINDS = {
@@ -39,6 +40,10 @@ func construct(player_data: MiniGameManager.PlayerData):
 	
 	points = 0
 	points_label.text = str(points)
+	
+	var connected_joypads = Input.get_connected_joypads()
+	if connected_joypads.size() > player_data.index:
+		player_joypad_device = connected_joypads[player_data.index]
 
 
 func _ready():
@@ -48,6 +53,9 @@ func _ready():
 func _unhandled_input(event):
 	if event is InputEventKey:
 		if not event.pressed and event.keycode == player_keybind:
+			_on_button_click()
+	if event is InputEventJoypadButton:
+		if not event.pressed and event.device == player_joypad_device and event.button_index == JOY_BUTTON_A:
 			_on_button_click()
 
 

@@ -51,8 +51,11 @@ namespace Game
 
         private void Update()
         {
-            if (_pauseControl != null && !_pauseControl.IsPaused && Input.GetKeyUp(_keybind))
-                OnClick();
+            if (_pauseControl != null && !_pauseControl.IsPaused)
+            {
+                if (Input.GetKeyUp(_keybind) || Input.GetKeyUp($"joystick {PlayerData.Number} button 0"))
+                    OnClick();
+            }
         }
 
         private void OnClick()
