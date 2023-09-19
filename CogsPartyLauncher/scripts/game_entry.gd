@@ -79,16 +79,32 @@ func construct(_game_data: Dictionary):
 	else:
 		errors.append("Missing builds")
 	
+	var player_bounds_valid = true
 	if not (game_data.has("min_players") and game_data.min_players is float):
 		errors.append("Missing min players")
+		player_bounds_valid = false
+	elif game_data.min_players <= 1:
+		player_bounds_valid = false
+		errors.append("Cannot have singleplayer only games. min_players >= 2")
+		
 	if not (game_data.has("max_players") and game_data.max_players is float):
+		player_bounds_valid = false
 		errors.append("Missing max players")
+	elif game_data.max_players <= 1:
+		player_bounds_valid = false
+		errors.append("Cannot have singleplayer only games. max_players >= 2")
 	
-	if game_data.has("min_players") and game_data.has("max_players"):
-		player_count_label.text = "%d - %d Players" % [game_data.min_players, game_data.max_players]
+	if player_bounds_valid and game_data.max_players < game_data.min_players:
+		player_bounds_valid = false
+		errors.append("max_players must be >= min_players")
+	
+	if player_bounds_valid and game_data.has("min_players") and game_data.has("max_players"):
+		if game_data.min_players == game_data.max_players:
+			player_count_label.text = "%d Players" % [game_data.min_players]
+		else:
+			player_count_label.text = "%d - %d Players" % [game_data.min_players, game_data.max_players]
 	else:
 		player_count_label.text = "N/A"
-		
 	_update_ui()
 
 
@@ -120,7 +136,6 @@ func _update_ui():
 	
 	if display_mode:
 		enabled_checkbox.visible = false
-		error_panel.visible = false
 
 
 func _on_enabled_checbox_toggled(toggled: bool):

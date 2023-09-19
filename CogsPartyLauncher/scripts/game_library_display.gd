@@ -15,7 +15,7 @@ var games: Array[Dictionary]
 var allowed_games	# Array[Dictionary] | Null
 
 
-func update(_games: Array[Dictionary], _allowed_games = null,):
+func update(_games: Array[Dictionary], _allowed_games = null):
 	games = _games
 	allowed_games = _allowed_games
 	
