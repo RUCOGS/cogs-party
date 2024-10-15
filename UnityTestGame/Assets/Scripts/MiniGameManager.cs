@@ -1,6 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
-using NaughtyAttributes;
-using System;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -33,7 +32,6 @@ namespace Game
         public string GameName { get; set; }
         [field: SerializeField]
         public Vector2Int PlayerCount { get; set; } = new Vector2Int(2, 4);
-        [field: ReadOnly]
         [field: SerializeField]
         public string SaveFilePath { get; set; }
         public SaveData SaveFileData { get; private set; } = null;
@@ -115,11 +113,18 @@ namespace Game
             Application.Quit();
         }
 
-        private async UniTaskVoid Start()
+
+        private void Start()
+        {
+            StartCoroutine(nameof(InitializeCoroutine));
+        }
+
+        private IEnumerator InitializeCoroutine()
         {
             Screen.fullScreen = true;
 
-            await UniTask.Yield();
+            yield return new WaitForEndOfFrame();
+
             ParseCmdArgs();
 
             if (SaveFileData == null)
