@@ -1,0 +1,13 @@
+{
+  "$GMScript":"v1",
+  "%Name":"GameManager",
+  "isCompatibility":false,
+  "isDnD":false,
+  "name":"GameManager",
+  "parent":{
+    "name":"Objects",
+    "path":"folders/Objects.yy",
+  },
+  "resourceType":"GMScript",
+  "resourceVersion":"2.0",
+}
