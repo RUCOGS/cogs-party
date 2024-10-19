@@ -17,8 +17,7 @@
   "extensionVersion":"0.0.1",
   "files":[
     {"$GMExtensionFile":"","%Name":"","constants":[],"copyToTargets":-1,"filename":"c_minigame_manager.gml","final":"","functions":[
-        {"$GMExtensionFunction":"","%Name":"cg_new_player_data","argCount":0,"args":[],"documentation":"","externalName":"ext_new_player_data","help":"","hidden":false,"kind":2,"name":"cg_new_player_data","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":1,},
-        {"$GMExtensionFunction":"","%Name":"cg_init","argCount":0,"args":[],"documentation":"","externalName":"ext_init","help":"","hidden":false,"kind":2,"name":"cg_init","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":1,},
+        {"$GMExtensionFunction":"","%Name":"init","argCount":0,"args":[],"documentation":"","externalName":"ext_init","help":"","hidden":true,"kind":2,"name":"init","resourceType":"GMExtensionFunction","resourceVersion":"2.0","returnType":1,},
       ],"init":"init","kind":2,"name":"","order":[],"origname":"","ProxyFiles":[],"resourceType":"GMExtensionFile","resourceVersion":"2.0","uncompress":false,"usesRunnerInterface":false,},
   ],
   "gradleinject":"",
@@ -41,7 +40,9 @@
   "maclinkerflags":"",
   "macsourcedir":"",
   "name":"cogs_party",
-  "options":[],
+  "options":[
+    {"$GMExtensionOption":"","%Name":"Game Name","defaultValue":"My GameMaker Game","description":"","displayName":"","exportToINI":false,"extensionId":null,"guid":"25292f3f-f423-4e8c-9c6e-6d2d844aaab8","hidden":false,"listItems":[],"name":"Game Name","optType":2,"resourceType":"GMExtensionOption","resourceVersion":"2.0",},
+  ],
   "optionsFile":"options.json",
   "packageId":"",
   "parent":{

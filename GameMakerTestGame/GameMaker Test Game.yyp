@@ -80,10 +80,13 @@
   "name":"GameMaker Test Game",
   "resources":[
     {"id":{"name":"cogs_party","path":"extensions/cogs_party/cogs_party.yy",},},
+    {"id":{"name":"o_background","path":"objects/o_background/o_background.yy",},},
     {"id":{"name":"o_game_manager","path":"objects/o_game_manager/o_game_manager.yy",},},
+    {"id":{"name":"o_minigame_manager","path":"objects/o_minigame_manager/o_minigame_manager.yy",},},
     {"id":{"name":"o_player","path":"objects/o_player/o_player.yy",},},
     {"id":{"name":"r_main_room","path":"rooms/r_main_room/r_main_room.yy",},},
     {"id":{"name":"c_minigame_manager","path":"scripts/c_minigame_manager/c_minigame_manager.yy",},},
+    {"id":{"name":"h_rainbow_shader","path":"shaders/h_rainbow_shader/h_rainbow_shader.yy",},},
     {"id":{"name":"s_sgj_poster","path":"sprites/s_sgj_poster/s_sgj_poster.yy",},},
     {"id":{"name":"s_square_corner_32_outline","path":"sprites/s_square_corner_32_outline/s_square_corner_32_outline.yy",},},
     {"id":{"name":"s_square_corner_32","path":"sprites/s_square_corner_32/s_square_corner_32.yy",},},
