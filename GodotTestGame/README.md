@@ -32,33 +32,33 @@ extends Node
 @export var mini_game_manager: MiniGameManager
 
 func _ready():
-    mini_game_manager.started.connect(_on_started)
+	mini_game_manager.started.connect(_on_started)
 
 func _on_started(player_data_array: Array[MiniGameManager]):
-    for player_data in player_data_array:
-        # Spawn players using player_data from player_data_array
-        print("Spawning player " + player_data.number)
+	for player_data in player_data_array:
+		# Spawn players using player_data from player_data_array
+		print("Spawning player " + player_data.number)
 
 
 var time_left = 10
 func _process(delta: float):
-    time_left -= delta
-    if time_left < 0:
-        # End the game after the time is up
-        end_game()
+	time_left -= delta
+	if time_left < 0:
+		# End the game after the time is up
+		end_game()
 
 
 func end_game():
-    # Assign points to each player
-    # In the eaxmple below, we give 1 point to player 1 and 3 points to player 2
-    mini_game_manager.end_game([
-        {
-            "player": 0,
-            "points": 1
-        },
-        {
-            "player": 1,
-            "points": 3
-        }
-    ])
+	# Assign points to each player
+	# In the eaxmple below, we give 1 point to player 1 and 3 points to player 2
+	mini_game_manager.end_game([
+		{
+			"player": 0,
+			"points": 1
+		},
+		{
+			"player": 1,
+			"points": 3
+		}
+	])
 ```

@@ -202,3 +202,25 @@ Here is more detailed documentation on all the supported fields within this JSON
           }
           ```
         - Player one earns 3 points
+
+## COGS Party Repository Development
+
+The following sections are for development of the COGS Party Repository
+
+## Adding New Test Games
+
+If there is demand for a minigame manager library for a specific engine, you can make a new test game under this repository for that engine. Make sure your test game folder is named `[EngineName]TestGame`, and include a `README.md` file inside the folder to describe how to install and use the engine's minigame manager library. Make sure to also update the list under [Pre-Made Libraries](#pre-made-libraries) to link to your new test game's `README.md` file. You can look at existing test games to see how minigame manager libraries are built, and how your `README.md` file should be formatted.
+
+## Build + Bundling Test Games
+
+A good way to test all the test games together is to build and and bundle the test games with the launcher. This extracts the launcher builds + games into a dedicated folder that can then be shared with others to test the launcher + games on different platforms.
+
+If you want to build and bundle the test games in this repository, then follow these steps:
+
+1. Open the COGS Party Launcher Godot project, and build the launcher for Windows, MacOS, and Linux under the `CogsPartyLauncher/builds` folder.
+   - `builds` folder should have a `windows`, `linux`, and `macos` folder, which contain the final builds for each corresponding platform
+   - For `macos`, you should extract the zip file
+2. Open each test game project and build for the three different platforms, making sure the final build files end up underneath the project's minigame folder located at `Games/[XXX]TestGame`
+   - `Games/[XXX]TestGame` should have a `windows`, `linux`, and `macos` folder, which contain the final builds for each corresponding platform
+3. Run the `build.sh` or `build.bat` file to bundle `CogsPartyLauncher/builds` and the `Games` folder together.
+   - Note that running the `build.bat` file require git bash to be installed.

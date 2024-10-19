@@ -8,6 +8,8 @@
   "min_players": 2,
   "max_players": 4,
   "builds": {
-    "windows": "./windows/UnityTestGame.exe"
+    "windows": "./windows/UnityTestGame.exe",
+    "macos": "./macos/UnityTestGame.app",
+    "linux": "./linux/UnityTestGame.x86_64"
   }
 }
