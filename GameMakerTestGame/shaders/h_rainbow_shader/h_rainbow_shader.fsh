@@ -9,6 +9,7 @@ uniform float u_speed;
 uniform float u_angle;
 uniform float u_scale;
 uniform float u_time;
+uniform float u_darken;
 
 float ease_in(float t) {
 	return t * t * t;
@@ -34,5 +35,5 @@ void main() {
 	}
 	vec4 color = texture2D(gm_BaseTexture, v_vTexcoord);
 	float final_strength = ease_in(v_vTexcoord.x) * u_strength;
-	gl_FragColor = color + vec4(rainbow, color.a) * final_strength;
+	gl_FragColor = mix(color + vec4(rainbow, color.a) * final_strength, vec4(0.0), u_darken);
 }

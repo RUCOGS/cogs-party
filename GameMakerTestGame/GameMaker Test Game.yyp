@@ -79,6 +79,10 @@
   },
   "name":"GameMaker Test Game",
   "resources":[
+    {"id":{"name":"f_urbanist_black","path":"fonts/f_urbanist_black/f_urbanist_black.yy",},},
+    {"id":{"name":"f_urbanist_medium","path":"fonts/f_urbanist_medium/f_urbanist_medium.yy",},},
+    {"id":{"name":"f_urbanist_semibold_24","path":"fonts/f_urbanist_semibold_24/f_urbanist_semibold_24.yy",},},
+    {"id":{"name":"f_urbanist_semibold_42","path":"fonts/f_urbanist_semibold_42/f_urbanist_semibold_42.yy",},},
     {"id":{"name":"o_background","path":"objects/o_background/o_background.yy",},},
     {"id":{"name":"o_game_manager","path":"objects/o_game_manager/o_game_manager.yy",},},
     {"id":{"name":"o_minigame_manager","path":"objects/o_minigame_manager/o_minigame_manager.yy",},},
