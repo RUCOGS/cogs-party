@@ -1,20 +1,20 @@
 var cx = self.x + true_width / 2
-var cy = self.y + true_height * 0.175
+var cy = self.y + true_height / 2 - 24
 
 draw_sprite_stretched_ext(s_square_corner_32, 1, self.x, self.y, true_width, true_height, c_black, 0.25);
-
-draw_set_color(c_white)
-draw_set_alpha(1)
 draw_set_font(f_urbanist_semibold_20);
 draw_set_halign(fa_middle)
 draw_set_valign(fa_middle)
 draw_text(cx, cy - 64, string("Player {0}", player_data.number));
 
 draw_set_font(f_urbanist_semibold_64);
-draw_text(cx, cy, string("{0}", points));
+var points_text = "X";
+if (earned_points > 0) {
+	points_text = string("+{0}", earned_points);
+}
+draw_text(cx, cy, string("{0}", points_text));
 
 draw_set_font(f_urbanist_semibold_20);
-var c = c_white
-draw_text_color(cx, cy + 64, string("Press {0}", input_key),c,c,c,c,0.25);
+draw_text(cx, cy + 64, string("{0}", player_data.points));
 
 draw_self()

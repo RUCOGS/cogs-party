@@ -78,10 +78,17 @@ function end_game(_results = noone) {
 /// @param {Array<Struct.PlayerResult>} _results Array of PlayerResult
 function apply_results(_results) {
 	try {
-		var _game_result = {
+		// Apply results to player save data
+		for (var i = 0; i < array_length(_results); i++) {
+			var player_result = _results[i];
+			save_data.players[player_result.player].points += player_result.points;
+		}
+		// Add result to save_data games
+		var game_result = {
 			name: game_name,
 			results: _results
 		};
+		array_push(save_data.games, game_result);
 		if (save_file_path != "") {
 			var file = file_text_open_write(save_file_path);
 			file_text_write_string(file, json_stringify(save_data, true));
@@ -135,10 +142,11 @@ var _init = function() {
 		game_end();
 	}
 
-	// Set player_data_array
+	// Set player_data_array14qrup
 	player_data_array = [];
-	for (var i = int64(0); i < array_length(save_data.players); i++) {
-		var save_player = save_data.players[i];
+	var save_data_players = save_data.players;
+	for (var i = int64(0); i < array_length(save_data_players); i++) {
+		var save_player = save_data_players[i];
 		player_data_array[i] = {
 			index: i,
 			number: i + 1,

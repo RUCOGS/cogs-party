@@ -1,4 +1,4 @@
-//
+ //
 // Simple passthrough fragment shader
 //
 varying vec2 v_vTexcoord;
@@ -35,5 +35,5 @@ void main() {
 	}
 	vec4 color = texture2D(gm_BaseTexture, v_vTexcoord);
 	float final_strength = ease_in(v_vTexcoord.x) * u_strength;
-	gl_FragColor = mix(color + vec4(rainbow, color.a) * final_strength, vec4(0.0), u_darken);
+	gl_FragColor = vec4(mix(vec3(color) + rainbow * final_strength, vec3(0.0), u_darken), color.a);
 }
