@@ -29,7 +29,7 @@ using UnityEngine;
 using System.Collections;
 using static SaveData.GameResult;
 
-public class GameManager : MonoBehavior
+public class GameManager : MonoBehaviour
 {
     // Get a reference to the MiniGameManager
     // Can drag-and-drop in the MiniGameManager from the inspector
