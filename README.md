@@ -205,7 +205,7 @@ Here is more detailed documentation on all the supported fields within this JSON
 
 ## COGS Party Repository Development
 
-The following sections are for development of the COGS Party Repository
+The following sections are for development of the COGS Party Repository. This is documentation for future COGS e-board members who will run COGS Party.
 
 ## Adding New Test Games
 
