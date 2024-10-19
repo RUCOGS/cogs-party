@@ -6,7 +6,11 @@ class_name MiniGameManager
 ## to detect when the game starts and ends.
 
 
-signal game_started(player_data)
+## Emitted when the game starts
+## player_data_array: Array of player data for all the players
+## 									  that are playing your minigame 
+signal game_started(player_data_array: Array[PlayerData])
+## Emitted when the game ends
 signal game_ended()
 
 
@@ -118,8 +122,8 @@ class PlayerResultData:
 
 
 # Returns an array of PlayerData
-func get_players() -> Array:
-	var players = [];
+func get_players() -> Array[PlayerData]:
+	var players: Array[PlayerData] = []
 	var i = 0
 	for dict in save_file_data["players"]:
 		players.append(PlayerData.new(i, Color(dict.color), dict.points))
@@ -130,8 +134,8 @@ func get_players() -> Array:
 ## Applies the results to the save data.
 ##
 ## This can only be done once during the entire game, and is
-#e usually done at the end.
-func apply_results(results: Array):
+## usually done at the end.
+func apply_results(results: Array[PlayerResultData]):
 	if applied_results:
 		push_error("Cannot add results twice!")
 		return
@@ -152,7 +156,7 @@ func apply_results(results: Array):
 		save_file_data["players"][result.player].points += result.points
 
 
-## Ends the game with some results 
+## Ends the game with some results.
 ## 
 ## `results` is an array that stores an array of PlayerResultData.
 ## Each dictionary holds a player number, and the points they've 
@@ -168,10 +172,12 @@ func apply_results(results: Array):
 ## 	  	  "points": 3
 ## 	  },
 ## ]
-func end_game(results = null):
+##
+## If you manually called `apply_results` earlier, then you do not need to pass in a `results` parameter.
+func end_game(results: Array[PlayerResultData] = []):
 	game_ended.emit()
 	
-	if results != null:
+	if len(results) > 0:
 		apply_results(results)
 	
 	if save_file_path != "":

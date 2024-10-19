@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
-using static Game.SaveData.GameResult;
+using static SaveData.GameResult;
 
 namespace Game
 {

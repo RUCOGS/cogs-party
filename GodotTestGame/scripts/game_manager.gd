@@ -90,7 +90,7 @@ func _end_game():
 	var top_players = player_panels.duplicate();
 	top_players.sort_custom(_sort_player_panel_descending)		
 	
-	var results = []
+	var results: Array[MiniGameManager.PlayerResultData] = []
 	var i = 0
 	var prev_player = null
 	for player in top_players:
