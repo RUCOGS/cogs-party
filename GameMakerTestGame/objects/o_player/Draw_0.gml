@@ -14,7 +14,8 @@ draw_set_font(f_urbanist_semibold_64);
 draw_text(cx, cy, string("{0}", points));
 
 draw_set_font(f_urbanist_semibold_20);
-var c = c_white
-draw_text_color(cx, cy + 64, string("Press {0}", input_key),c,c,c,c,0.25);
+draw_set_alpha(0.5)
+draw_text(cx, cy + 64, string("Press {0}", input_key));
+draw_set_alpha(1)
 
 draw_self()

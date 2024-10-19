@@ -1,0 +1,15 @@
+{
+  "title": "Game Maker Test Game",
+  "description": "A simple counting game with friends written in Game Maker!",
+  "banner": "./banner.png",
+  "date": "10/19/2024",
+  "developers": ["Alan"],
+  "engine": "GameMaker",
+  "min_players": 2,
+  "max_players": 4,
+  "builds": {
+    "windows": "./windows/GameMakerTestGame.exe",
+    "macos": "./macos/GameMakerTestGame.app",
+    "linux": "./linux/GameMakerTestGame.x86_64"
+  }
+}
