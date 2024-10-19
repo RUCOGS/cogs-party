@@ -79,7 +79,6 @@
   },
   "name":"GameMaker Test Game",
   "resources":[
-    {"id":{"name":"cogs_party","path":"extensions/cogs_party/cogs_party.yy",},},
     {"id":{"name":"o_background","path":"objects/o_background/o_background.yy",},},
     {"id":{"name":"o_game_manager","path":"objects/o_game_manager/o_game_manager.yy",},},
     {"id":{"name":"o_minigame_manager","path":"objects/o_minigame_manager/o_minigame_manager.yy",},},

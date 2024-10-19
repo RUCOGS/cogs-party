@@ -4,18 +4,18 @@
 varying vec2 v_vTexcoord;
 varying vec4 v_vColour;
 
-uniform float u_strength = 0.5;
-uniform float u_speed = 0.5;
-uniform float u_angle = 0.;
-uniform float u_scale = 1.;
-uniform float u_time = 1.;
+uniform float u_strength;
+uniform float u_speed;
+uniform float u_angle;
+uniform float u_scale;
+uniform float u_time;
 
 float ease_in(float t) {
 	return t * t * t;
 }
 
 void main() {
-	float hue = in_TextureCoord.x * cos(radians(u_angle)) - in_TextureCoord.y * sin(radians(u_angle));
+	float hue = v_vTexcoord.x * cos(radians(u_angle)) - v_vTexcoord.y * sin(radians(u_angle));
 	hue = fract(hue * u_scale + fract(u_time  * u_speed));
 	float x = 1. - abs(mod(hue / (1./ 6.), 2.) - 1.);
 	vec3 rainbow;
@@ -32,7 +32,7 @@ void main() {
 	} else {
 		rainbow = vec3(1., 0., x);
 	}
-	vec4 color = texture2D(gm_BaseTexture, in_TextureCoord);
-	float final_strength = ease_in(in_TextureCoord.x) * u_strength;
+	vec4 color = texture2D(gm_BaseTexture, v_vTexcoord);
+	float final_strength = ease_in(v_vTexcoord.x) * u_strength;
 	gl_FragColor = color + vec4(rainbow, color.a) * final_strength;
 }
