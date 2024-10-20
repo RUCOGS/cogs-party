@@ -82,6 +82,7 @@ function apply_results(_results) {
 		for (var i = 0; i < array_length(_results); i++) {
 			var player_result = _results[i];
 			save_data.players[player_result.player].points += player_result.points;
+			player_data_array[player_result.player].points = save_data.players[player_result.player].points
 		}
 		// Add result to save_data games
 		var game_result = {
@@ -103,14 +104,15 @@ function apply_results(_results) {
 }
 
 var _init = function() {
-	// Parse cmd paramters for save file path
+	// Parse cmd parameters for save file path
 	var p_num = parameter_count();
 	var file_path = "";
 	if (p_num > 0)
 	{
-		for (var i = 0; i < p_num; i += 1)
+		for (var i = 0; i < p_num; i++)
 		{
 			var p_string = parameter_string(i + 1);
+			_print(string("  Arg[{0}]: {1}", i, p_string));
 			if (string_starts_with(p_string, "--savefile=")) {
 				file_path = string_split(p_string, "=")[1];
 			}
@@ -123,12 +125,13 @@ var _init = function() {
 	try {
 		if (file_path != "") {
 			// String exists
-			var file = file_text_open_read(file_path);
-			var load_data = file_text_read_string(file);
-			file_text_close(file);
+			var file_buffer = buffer_load(file_path);
+			var load_data = buffer_read(file_buffer, buffer_string);
+			_print("Raw save file text:\n" + load_data);
+			buffer_delete(file_buffer);
 			save_file_path = file_path;
 			save_data = json_parse(load_data);
-			_print("Loaded save file data");
+			_print("Loaded save file data from: " + file_path);
 		} else {
 			_print("Loaded dummy data");
 		}

@@ -1,4 +1,4 @@
-[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b87yd308vxbfo"]
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dhjxc32vn50nn"]
 
 [ext_resource type="Shader" path="res://assets/rainbow.gdshader" id="1_isb4a"]
 
