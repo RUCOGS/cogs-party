@@ -8,8 +8,9 @@ Last tested on Unity 6000.0.23f1
 
 ### Installation
 
-1. Download `Assets/Scripts/MiniGameManager.cs` and add it to your Godot project.
+1. Download `Assets/Scripts/MiniGameManager.cs` and add it to your Unity project.
 2. Attach the `MiniGameManager` component to a GameObject in your game's main scene.
+3. Set the `GameName` field on the minigame manager component to your minigame's name.
 
 ### Usage
 

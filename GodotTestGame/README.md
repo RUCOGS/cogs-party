@@ -10,6 +10,7 @@ Last tested on Godot 4.3
 
 1. Download `scripts/mini_game_manager.gd` and add it to your Godot project.
 2. Create a `Node` in your game's main scene and attach the `mini_game_manager.gd` script.
+3. Set the `game_name` property on the minigame manager node to your minigame's name.
 
 ### Usage
 
