@@ -100,7 +100,7 @@ func _end_game():
 			if i >= player_reward_points.size():
 				break
 		results.append(MiniGameManager.PlayerResultData.new(
-			player.player_data.number, 
+			player.player_data.index, 
 			player_reward_points[i]
 		))
 		prev_player = player

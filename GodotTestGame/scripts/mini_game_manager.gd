@@ -105,7 +105,7 @@ class PlayerData:
 
 ## Holds information about the result of a match for a player
 class PlayerResultData:
-	## Player's number
+	## Player's index (0 for player 1, 1 for player 2)
 	var player: int
 	## The points a player has earned/lost
 	var points: int
@@ -116,7 +116,7 @@ class PlayerResultData:
 	
 	func to_dict() -> Dictionary:
 		return {
-			"player": player - 1,
+			"player": player,
 			"points": points
 		}
 
@@ -164,7 +164,7 @@ func apply_results(results: Array[PlayerResultData]):
 ## 
 ## [
 ## 	  {
-## 	  	  "player": 1,
+## 	  	  "player": 0,
 ## 	  	  "points": 1
 ## 	  },
 ## 	  {
