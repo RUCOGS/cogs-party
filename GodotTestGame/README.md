@@ -51,7 +51,7 @@ func _process(delta: float):
 
 func end_game():
 	# Assign points to each player
-	# In the eaxmple below, we give 1 point to player 1 and 3 points to player 2
+	# In the example below, we give 1 point to player 1 and 3 points to player 2
 	mini_game_manager.end_game([
 		{
 			"player": 0,
