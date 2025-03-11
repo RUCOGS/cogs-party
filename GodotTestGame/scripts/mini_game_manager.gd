@@ -135,7 +135,7 @@ func get_players() -> Array[PlayerData]:
 ##
 ## This can only be done once during the entire game, and is
 ## usually done at the end.
-func apply_results(results: Array[PlayerResultData]):
+func apply_results(results: Array = []):
 	if applied_results:
 		push_error("Cannot add results twice!")
 		return
@@ -174,7 +174,7 @@ func apply_results(results: Array[PlayerResultData]):
 ## ]
 ##
 ## If you manually called `apply_results` earlier, then you do not need to pass in a `results` parameter.
-func end_game(results: Array[PlayerResultData] = []):
+func end_game(results: Array = []):
 	game_ended.emit()
 	
 	if len(results) > 0:
