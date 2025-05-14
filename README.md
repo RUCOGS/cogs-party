@@ -2,7 +2,7 @@
 
 # ⚙ COGS Party
 
-A party game with a collection of club member made minigames. Every semester, members work together to contribute a single minigame to COGS party.
+A party game with a collection of club member made minigames. Every semester, members work together in small groups to contribute minigames to COGS Party.
 
 ## Minigames
 
