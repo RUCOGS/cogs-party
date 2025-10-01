@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://bp0606lonchki"]
 
 [ext_resource type="Theme" uid="uid://036n6qd3ik2g" path="res://assets/theme.tres" id="1_7e4nq"]
-[ext_resource type="Script" path="res://scripts/game_library_display.gd" id="1_y4w2o"]
+[ext_resource type="Script" uid="uid://bw0vbk0lraase" path="res://scripts/game_library_display.gd" id="1_y4w2o"]
 [ext_resource type="PackedScene" uid="uid://b3fh8hsqlpcp2" path="res://prefabs/game_entry.tscn" id="2_vypkx"]
 [ext_resource type="FontFile" uid="uid://bg4kldgugtb2r" path="res://assets/urbanist/static/Urbanist-Black.ttf" id="3_jyrsh"]
 

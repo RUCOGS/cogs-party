@@ -1,36 +1,20 @@
 [gd_scene load_steps=22 format=3 uid="uid://k31chn02rvs2"]
 
 [ext_resource type="Theme" uid="uid://036n6qd3ik2g" path="res://assets/theme.tres" id="1_erdau"]
-[ext_resource type="Script" path="res://scripts/main_menu.gd" id="2_6njpl"]
-[ext_resource type="Script" path="res://scripts/menu_navigator.gd" id="2_84tmd"]
+[ext_resource type="Script" uid="uid://du6vnjc42pp0f" path="res://scripts/main_menu.gd" id="2_6njpl"]
+[ext_resource type="Script" uid="uid://wo7xrv8tk145" path="res://scripts/menu_navigator.gd" id="2_84tmd"]
 [ext_resource type="Material" uid="uid://b87yd308vxbfo" path="res://assets/rainbow_material.tres" id="2_o310u"]
 [ext_resource type="Texture2D" uid="uid://86474c6ugxyg" path="res://assets/sgj_poster.png" id="3_6h253"]
 [ext_resource type="FontFile" uid="uid://bg4kldgugtb2r" path="res://assets/urbanist/static/Urbanist-Black.ttf" id="4_jhk8j"]
 [ext_resource type="PackedScene" uid="uid://b3fh8hsqlpcp2" path="res://prefabs/game_entry.tscn" id="6_eeign"]
-[ext_resource type="Script" path="res://scripts/player_select_menu.gd" id="6_v4hmo"]
-[ext_resource type="Script" path="res://scripts/game_library.gd" id="7_afary"]
+[ext_resource type="Script" uid="uid://7rqb3xfjladw" path="res://scripts/player_select_menu.gd" id="6_v4hmo"]
+[ext_resource type="Script" uid="uid://dhvwntodxsxdv" path="res://scripts/game_library.gd" id="7_afary"]
 [ext_resource type="Texture2D" uid="uid://uc8pxnfjvsmj" path="res://assets/icon_reload.svg" id="7_ywnar"]
 [ext_resource type="PackedScene" uid="uid://c24hlo57mf44p" path="res://prefabs/player_setting.tscn" id="8_g7i7g"]
 [ext_resource type="Texture2D" uid="uid://c27ucuw3vtgn6" path="res://assets/icon_add.svg" id="9_f0lwm"]
-[ext_resource type="Script" path="res://scripts/lobby_menu.gd" id="9_iaqec"]
+[ext_resource type="Script" uid="uid://bp3vaw5ln4p3n" path="res://scripts/lobby_menu.gd" id="9_iaqec"]
 [ext_resource type="PackedScene" uid="uid://ccybwxdqx3qi7" path="res://prefabs/lobby_player.tscn" id="10_ewmxw"]
 [ext_resource type="PackedScene" uid="uid://bp0606lonchki" path="res://prefabs/game_library_display.tscn" id="11_gn2ub"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cgwq"]
-content_margin_left = 36.0
-content_margin_top = 18.0
-content_margin_right = 36.0
-content_margin_bottom = 30.0
-bg_color = Color(0.403922, 0.403922, 0.403922, 0.317647)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 9
-border_color = Color(1, 1, 1, 0.760784)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ytcv"]
 content_margin_left = 36.0
@@ -48,12 +32,17 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_shf47"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5cgwq"]
 content_margin_left = 36.0
-content_margin_top = 9.0
+content_margin_top = 18.0
 content_margin_right = 36.0
-content_margin_bottom = 9.0
-bg_color = Color(0.180392, 0.180392, 0.180392, 0.584314)
+content_margin_bottom = 30.0
+bg_color = Color(0.403922, 0.403922, 0.403922, 0.317647)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 9
+border_color = Color(1, 1, 1, 0.760784)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
@@ -70,11 +59,11 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jel6n"]
-content_margin_left = 42.0
-content_margin_top = 18.0
-content_margin_right = 42.0
-content_margin_bottom = 18.0
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_shf47"]
+content_margin_left = 36.0
+content_margin_top = 9.0
+content_margin_right = 36.0
+content_margin_bottom = 9.0
 bg_color = Color(0.180392, 0.180392, 0.180392, 0.584314)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
@@ -87,6 +76,17 @@ content_margin_top = 18.0
 content_margin_right = 42.0
 content_margin_bottom = 18.0
 bg_color = Color(0, 0, 0, 0.584314)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jel6n"]
+content_margin_left = 42.0
+content_margin_top = 18.0
+content_margin_right = 42.0
+content_margin_bottom = 18.0
+bg_color = Color(0.180392, 0.180392, 0.180392, 0.584314)
 corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
@@ -133,7 +133,6 @@ theme_override_constants/margin_right = 30
 theme_override_constants/margin_bottom = 30
 
 [node name="PlayerSelectMenu" type="VBoxContainer" parent="Menus" node_paths=PackedStringArray("player_setting_container", "add_player_button", "play_button", "back_button", "game_library", "menu_navigator", "game_library_display")]
-visible = false
 layout_mode = 2
 theme_override_constants/separation = 32
 alignment = 1
@@ -193,9 +192,9 @@ alignment = 1
 custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_jhk8j")
-theme_override_styles/hover = SubResource("StyleBoxFlat_5cgwq")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_5ytcv")
 theme_override_styles/normal = SubResource("StyleBoxFlat_5ytcv")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_5ytcv")
+theme_override_styles/hover = SubResource("StyleBoxFlat_5cgwq")
 icon = ExtResource("9_f0lwm")
 icon_alignment = 1
 
@@ -209,9 +208,9 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
-theme_override_styles/hover = SubResource("StyleBoxFlat_shf47")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_6kyxl")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6kyxl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6kyxl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_shf47")
 text = "B A C K"
 
 [node name="Control" type="Control" parent="Menus/PlayerSelectMenu/HBoxContainer"]
@@ -219,13 +218,12 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="PlayButton" type="Button" parent="Menus/PlayerSelectMenu/HBoxContainer"]
-custom_minimum_size = Vector2(200, 80)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 36
-theme_override_styles/hover = SubResource("StyleBoxFlat_jel6n")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_55hvc")
 theme_override_styles/normal = SubResource("StyleBoxFlat_55hvc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_55hvc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jel6n")
 text = "P L A Y"
 
 [node name="LobbyMenu" type="MarginContainer" parent="Menus" node_paths=PackedStringArray("menu_navigator", "game_library", "game_library_display", "quit_button", "next_button", "lobby_player_container", "lobby_view", "running_game_playing_label", "running_view", "running_game_entry")]
@@ -300,9 +298,9 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
-theme_override_styles/hover = SubResource("StyleBoxFlat_shf47")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_6kyxl")
 theme_override_styles/normal = SubResource("StyleBoxFlat_6kyxl")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6kyxl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_shf47")
 text = "Q U I T"
 
 [node name="Control" type="Control" parent="Menus/LobbyMenu/LobbyView/HBoxContainer"]
@@ -313,9 +311,9 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 36
-theme_override_styles/hover = SubResource("StyleBoxFlat_jel6n")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_55hvc")
 theme_override_styles/normal = SubResource("StyleBoxFlat_55hvc")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_55hvc")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jel6n")
 text = "N E X T"
 
 [node name="RunningView" type="PanelContainer" parent="Menus/LobbyMenu"]
@@ -449,7 +447,7 @@ text = "C R E D I T S"
 
 [node name="CreditsLabel" type="Label" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
-text = "- Alan Tong (Atlinx)"
+text = "- Alina Tong (Atlinx)"
 
 [node name="GameLibraryDisplay" parent="Menus/MainMenu" instance=ExtResource("11_gn2ub")]
 layout_mode = 2

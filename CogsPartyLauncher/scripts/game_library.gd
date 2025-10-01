@@ -86,6 +86,8 @@ func load_games(path: String):
 			else:
 				push_error("Could not read game file at path '%s'." % game_file_path)
 		file_name = dir.get_next()
+	
+	print("Loaded games:\n%s" % JSON.stringify(games))
 
 
 ## Returns the playable games for a given `player_count`
@@ -115,6 +117,7 @@ func get_random_enabled_playable_game():
 	var playable_games = get_enabled_playable_games()
 	if playable_games.size() == 0:
 		return null
+	print("enabled playable games: ", playable_games);
 	var game = playable_games[randi() % playable_games.size()]
 	if previous_game == game and playable_games.size() > 1:
 		var other_games = playable_games.duplicate()

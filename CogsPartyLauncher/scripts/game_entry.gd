@@ -70,8 +70,8 @@ func construct(_game_data: Dictionary):
 			if rel_build_location is String:
 				if build is String and build in SUPPORTED_BUILDS:
 					var build_location = game_data.directory_path + "/" + rel_build_location
-					if not FileAccess.file_exists(build_location) and not DirAccess.dir_exists_absolute(build_location):
-						errors.append("No file/folder found at location '%s'" % build_location)
+					if not FileAccess.file_exists(build_location):
+						errors.append("No file found at location '%s'" % build_location)
 				else:
 					errors.append("Failed to parse build: '%s'" % build)
 			else:
