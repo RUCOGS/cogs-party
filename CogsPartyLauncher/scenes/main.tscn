@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://k31chn02rvs2"]
+[gd_scene load_steps=23 format=3 uid="uid://k31chn02rvs2"]
 
 [ext_resource type="Theme" uid="uid://036n6qd3ik2g" path="res://assets/theme.tres" id="1_erdau"]
 [ext_resource type="Script" uid="uid://du6vnjc42pp0f" path="res://scripts/main_menu.gd" id="2_6njpl"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" uid="uid://bp3vaw5ln4p3n" path="res://scripts/lobby_menu.gd" id="9_iaqec"]
 [ext_resource type="PackedScene" uid="uid://ccybwxdqx3qi7" path="res://prefabs/lobby_player.tscn" id="10_ewmxw"]
 [ext_resource type="PackedScene" uid="uid://bp0606lonchki" path="res://prefabs/game_library_display.tscn" id="11_gn2ub"]
+[ext_resource type="Texture2D" uid="uid://cgjaoni88rsk0" path="res://assets/COGS Party.png" id="15_jbj1t"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ytcv"]
 content_margin_left = 36.0
@@ -227,7 +228,6 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_jel6n")
 text = "P L A Y"
 
 [node name="LobbyMenu" type="MarginContainer" parent="Menus" node_paths=PackedStringArray("menu_navigator", "game_library", "game_library_display", "quit_button", "next_button", "lobby_player_container", "lobby_view", "running_game_playing_label", "running_view", "running_game_entry")]
-visible = false
 layout_mode = 2
 script = ExtResource("9_iaqec")
 menu_navigator = NodePath("../../MenuNavigator")
@@ -343,6 +343,7 @@ layout_mode = 2
 display_mode = true
 
 [node name="MainMenu" type="HBoxContainer" parent="Menus" node_paths=PackedStringArray("play_button", "quit_game_button", "games_folder_select_button", "games_folder_select_file_dialog", "games_folder_label", "game_library", "menu_navigator", "game_library_display", "refresh_games_button")]
+visible = false
 layout_mode = 2
 theme = ExtResource("1_erdau")
 theme_override_constants/separation = 16
@@ -380,7 +381,13 @@ theme_override_constants/separation = 8
 layout_mode = 2
 theme_override_fonts/font = ExtResource("4_jhk8j")
 theme_override_font_sizes/font_size = 36
-text = "⚙ C O G S   P A R T Y"
+
+[node name="CogsParty" type="Sprite2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/Label"]
+texture_filter = 3
+texture_repeat = 1
+position = Vector2(222, 40.00003)
+scale = Vector2(0.12, 0.12)
+texture = ExtResource("15_jbj1t")
 
 [node name="Control" type="Control" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 40)

@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://86474c6ugxyg" path="res://assets/sgj_poster.png" id="1_asex0"]
 [ext_resource type="Theme" uid="uid://036n6qd3ik2g" path="res://assets/theme.tres" id="1_lafwr"]
-[ext_resource type="Script" path="res://scripts/game_entry.gd" id="1_y8fwy"]
+[ext_resource type="Script" uid="uid://ddvfjvf007pee" path="res://scripts/game_entry.gd" id="1_y8fwy"]
 [ext_resource type="FontFile" uid="uid://bg4kldgugtb2r" path="res://assets/urbanist/static/Urbanist-Black.ttf" id="2_o3hcj"]
-[ext_resource type="Script" path="res://scripts/crossout.gd" id="5_a1qsc"]
+[ext_resource type="Script" uid="uid://ct3gevvbqv3w" path="res://scripts/crossout.gd" id="5_a1qsc"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_km0gx"]
 content_margin_left = 8.0
