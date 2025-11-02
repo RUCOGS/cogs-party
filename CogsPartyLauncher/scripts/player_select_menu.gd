@@ -3,6 +3,7 @@ class_name PlayerSelectMenu
 
 
 @export var player_setting_prefab: PackedScene
+@export var player_cursor_prefab: PackedScene
 @export var player_setting_container: Control
 @export var add_player_button: Button
 @export var player_colors: Array[Color]
@@ -12,8 +13,11 @@ class_name PlayerSelectMenu
 @export var menu_navigator: MenuNavigator
 @export var game_library_display: GameLibraryDisplay
 
+
 var player_settings: Array[PlayerSetting]
+var player_cursors: Array[CharacterBody2D]
 var taken_colors: Dictionary = {}
+var taken_ids: Dictionary = {}
 
 
 func _ready():
@@ -22,7 +26,29 @@ func _ready():
 	back_button.pressed.connect(menu_navigator.load_menu.bind("MainMenu"))
 	game_library_display.changed.connect(_on_game_library_display_changed)
 	self.visibility_changed.connect(_on_visible_changed)
+	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	_update_add_player_button()
+
+
+# if an id is not found, the controllers id will be -1
+func _get_next_id() -> int:
+	var found_id = -1
+	var devices = Input.get_connected_joypads()
+	devices.sort()
+	
+	for device_id in devices:
+		if not taken_ids.has(device_id):
+			found_id = device_id
+			break
+	return found_id
+
+
+func _add_taken_id(device_id: int):
+	taken_ids[device_id] = null
+
+
+func _remove_taken_id(device_id: int):
+	taken_ids.erase(device_id)
 
 
 func _get_available_colors() -> Array[Color]:
@@ -119,13 +145,21 @@ func _on_player_count_changed():
 
 
 func _on_add_player_button_pressed():
+	var player_cursor = player_cursor_prefab.instantiate() as CharacterBody2D
+	var id = _get_next_id()
+	_add_taken_id(id)
+	player_cursor.controller_id = id
+	player_cursors.append(player_cursor)
+	add_child(player_cursor)
+	
 	var inst = player_setting_prefab.instantiate() as PlayerSetting
 	player_setting_container.add_child(inst)
 	player_setting_container.move_child(inst, player_setting_container.get_child_count() - 2)
 	inst.updated.connect(_on_player_setting_updated)
 	inst.removed.connect(_on_player_setting_removed.bind(inst))
 	inst.construct(
-		player_settings.size() + 1, 
+		player_settings.size() + 1,
+		player_cursor, 
 		_get_next_available_color_or_self()
 	)
 	player_settings.append(inst)
@@ -142,10 +176,29 @@ func _on_player_setting_removed(player_setting: PlayerSetting):
 	else:
 		next_focus_control.grab_focus()
 
+	_remove_taken_id(player_setting.player_cursor.controller_id)
+	player_cursors.erase(player_setting.player_cursor)
+	player_setting.player_cursor.queue_free()
+
 	player_setting_container.remove_child(player_setting)
 	player_setting.queue_free()
 	player_settings.erase(player_setting)
 	_on_player_count_changed()
+
+
+func _on_joy_connection_changed(device_id: int, connected: bool):
+	if connected:
+		for cursor in player_cursors:
+			if cursor.controller_id == -1:
+				_add_taken_id(device_id)
+				cursor.controller_id = device_id
+			break
+	else:
+		for cursor in player_cursors:
+			if cursor.controller_id == device_id:
+				_remove_taken_id(device_id)
+				cursor.controller_id = -1
+			break
 
 
 func _on_game_library_display_changed():
