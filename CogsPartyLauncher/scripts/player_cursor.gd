@@ -1,15 +1,20 @@
 extends CharacterBody2D
 
-@export var speed: float = 1000.0
+@export var speed: float = 30000.0
 
 var controller_id: int = 0
 
 func _physics_process(delta):
-	var x_axis = Input.get_joy_axis(controller_id, JOY_AXIS_LEFT_X)
-	position.x += x_axis * speed * delta
-	
-	var y_axis = Input.get_joy_axis(controller_id, JOY_AXIS_LEFT_Y)
-	position.y += y_axis * speed * delta
+	if controller_id != -1:
+		var direction = Input.get_vector(
+			"left%s" % [controller_id],
+			"right%s" % [controller_id],
+			"up%s" % [controller_id],
+			"down%s" % [controller_id]
+		)
+		
+		velocity = direction * speed * delta # Multiplies direction by speed and delta time
+		move_and_slide() # Built-in Godot movement function
 
 
 func update_color(color: Color):

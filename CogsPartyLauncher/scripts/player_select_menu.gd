@@ -30,6 +30,7 @@ func _ready():
 	_update_add_player_button()
 	
 	for device in Input.get_connected_joypads():
+		_add_controls(device)
 		_on_add_player_button_pressed()
 
 
@@ -191,12 +192,15 @@ func _on_player_setting_removed(player_setting: PlayerSetting):
 
 func _on_joy_connection_changed(device_id: int, connected: bool):
 	if connected:
+		# adds InputMap for the new device if needed
+		_add_controls(device_id)
+		
 		# check if there is an unlinked cursor
 		for cursor in player_cursors:
 			if cursor.controller_id == -1:
 				_add_taken_id(device_id)
 				cursor.controller_id = device_id
-			break
+				break
 		# if we need to make a new cursor
 		if not taken_ids.has(device_id):
 			_on_add_player_button_pressed()
@@ -207,6 +211,32 @@ func _on_joy_connection_changed(device_id: int, connected: bool):
 				cursor.controller_id = -1
 			break
 
+
+func _add_controls(device_id: int):
+	var controls = InputMap.get_actions()
+	
+	var controls_list = {
+		"left": null,
+		"right": null,
+		"up": null,
+		"down": null
+	}
+	
+	for control in controls:
+		if controls_list.has(control):
+			var action_name = control + str(device_id)
+			
+			if not InputMap.has_action(action_name):
+				InputMap.add_action(action_name)
+				
+				for event in InputMap.action_get_events(control):
+					var new_event = event.duplicate()
+					
+					if new_event is InputEventJoypadButton or new_event is InputEventJoypadMotion:
+						new_event.device = device_id
+						InputMap.action_add_event(action_name, new_event)
+			
+	
 
 func _on_game_library_display_changed():
 	_update_play_button()
