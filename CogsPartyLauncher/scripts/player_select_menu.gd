@@ -28,6 +28,9 @@ func _ready():
 	self.visibility_changed.connect(_on_visible_changed)
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	_update_add_player_button()
+	
+	for device in Input.get_connected_joypads():
+		_on_add_player_button_pressed()
 
 
 # if an id is not found, the controllers id will be -1
@@ -188,11 +191,15 @@ func _on_player_setting_removed(player_setting: PlayerSetting):
 
 func _on_joy_connection_changed(device_id: int, connected: bool):
 	if connected:
+		# check if there is an unlinked cursor
 		for cursor in player_cursors:
 			if cursor.controller_id == -1:
 				_add_taken_id(device_id)
 				cursor.controller_id = device_id
 			break
+		# if we need to make a new cursor
+		if not taken_ids.has(device_id):
+			_on_add_player_button_pressed()
 	else:
 		for cursor in player_cursors:
 			if cursor.controller_id == device_id:
