@@ -214,16 +214,10 @@ func _on_joy_connection_changed(device_id: int, connected: bool):
 
 func _add_controls(device_id: int):
 	var controls = InputMap.get_actions()
-	
-	var controls_list = {
-		"left": null,
-		"right": null,
-		"up": null,
-		"down": null
-	}
+	var control_prefix = "control_"
 	
 	for control in controls:
-		if controls_list.has(control):
+		if control.begins_with(control_prefix):
 			var action_name = control + str(device_id)
 			
 			if not InputMap.has_action(action_name):
