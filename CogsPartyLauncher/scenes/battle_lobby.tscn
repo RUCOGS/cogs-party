@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://cjgg05702oru6"]
+
+[ext_resource type="Script" uid="uid://b1mbcqdxvpg2b" path="res://scripts/battle_lobby.gd" id="1_seroy"]
+[ext_resource type="PackedScene" uid="uid://wlscvg0ftgn4" path="res://prefabs/battle_lobby_player.tscn" id="2_pjicw"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_seroy"]
+size = Vector2(706, 195)
+
+[node name="BattleLobby" type="Node2D"]
+script = ExtResource("1_seroy")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = 256.0
+offset_top = 432.0
+offset_right = 928.0
+offset_bottom = 596.0
+
+[node name="BattleLobbyPlayer" parent="." instance=ExtResource("2_pjicw")]
+position = Vector2(324, 366)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(594, 515.5)
+shape = SubResource("RectangleShape2D_seroy")

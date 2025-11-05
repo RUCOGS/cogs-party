@@ -228,6 +228,7 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_jel6n")
 text = "P L A Y"
 
 [node name="LobbyMenu" type="MarginContainer" parent="Menus" node_paths=PackedStringArray("menu_navigator", "game_library", "game_library_display", "quit_button", "next_button", "lobby_player_container", "lobby_view", "running_game_playing_label", "running_view", "running_game_entry")]
+visible = false
 layout_mode = 2
 script = ExtResource("9_iaqec")
 menu_navigator = NodePath("../../MenuNavigator")

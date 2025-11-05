@@ -1,0 +1,60 @@
+[gd_scene load_steps=9 format=3 uid="uid://wlscvg0ftgn4"]
+
+[ext_resource type="Script" uid="uid://26eawy0ym1nd" path="res://scripts/battle_lobby_player.gd" id="1_f8yvr"]
+[ext_resource type="Texture2D" uid="uid://khbpvrknrsi" path="res://assets/cog_logo.png" id="2_fp754"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7s1oo"]
+atlas = ExtResource("2_fp754")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xx223"]
+atlas = ExtResource("2_fp754")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f7dyp"]
+atlas = ExtResource("2_fp754")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p2hfl"]
+atlas = ExtResource("2_fp754")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ytlaa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7s1oo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xx223")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f7dyp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p2hfl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rpdns"]
+radius = 16.0
+height = 50.0
+
+[node name="BattleLobbyPlayer" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 7
+script = ExtResource("1_f8yvr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-0.74999905, -0.24999857)
+scale = Vector2(0.13867188, 0.16601563)
+sprite_frames = SubResource("SpriteFrames_ytlaa")
+frame = 1
+frame_progress = 0.7725079
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, 0)
+shape = SubResource("CapsuleShape2D_rpdns")
