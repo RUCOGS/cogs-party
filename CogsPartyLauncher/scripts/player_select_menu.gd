@@ -16,6 +16,7 @@ class_name PlayerSelectMenu
 
 var player_settings: Array[PlayerSetting]
 var player_cursors: Array[CharacterBody2D]
+var cursor_controls: Array[String]
 var taken_colors: Dictionary = {}
 var taken_ids: Dictionary = {}
 
@@ -32,6 +33,11 @@ func _ready():
 	for device in Input.get_connected_joypads():
 		_add_controls(device)
 		_on_add_player_button_pressed()
+	
+	# all non-ui controls get added to cursor controls
+	for control in InputMap.get_actions():
+		if !control.begins_with("ui"):
+			cursor_controls.append(control)
 
 
 # if an id is not found, the controllers id will be -1
@@ -213,22 +219,18 @@ func _on_joy_connection_changed(device_id: int, connected: bool):
 
 
 func _add_controls(device_id: int):
-	var controls = InputMap.get_actions()
-	var control_prefix = "control_"
-	
-	for control in controls:
-		if control.begins_with(control_prefix):
-			var action_name = control + str(device_id)
+	for control in cursor_controls:
+		var action_name = control + str(device_id)
 			
-			if not InputMap.has_action(action_name):
-				InputMap.add_action(action_name)
+		if not InputMap.has_action(action_name):
+			InputMap.add_action(action_name)
 				
-				for event in InputMap.action_get_events(control):
-					var new_event = event.duplicate()
+			for event in InputMap.action_get_events(control):
+				var new_event = event.duplicate()
 					
-					if new_event is InputEventJoypadButton or new_event is InputEventJoypadMotion:
-						new_event.device = device_id
-						InputMap.action_add_event(action_name, new_event)
+				if new_event is InputEventJoypadButton or new_event is InputEventJoypadMotion:
+					new_event.device = device_id
+					InputMap.action_add_event(action_name, new_event)
 			
 	
 

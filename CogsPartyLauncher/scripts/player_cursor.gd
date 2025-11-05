@@ -7,10 +7,10 @@ var controller_id: int = 0
 func _physics_process(delta):
 	if controller_id != -1:
 		var direction = Input.get_vector(
-			"control_left%s" % [controller_id],
-			"control_right%s" % [controller_id],
-			"control_up%s" % [controller_id],
-			"control_down%s" % [controller_id]
+			"left%s" % [controller_id],
+			"right%s" % [controller_id],
+			"up%s" % [controller_id],
+			"down%s" % [controller_id]
 		)
 		
 		velocity = direction * speed * delta # Multiplies direction by speed and delta time
