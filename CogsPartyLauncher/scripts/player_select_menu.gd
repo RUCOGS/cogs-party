@@ -30,14 +30,14 @@ func _ready():
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	_update_add_player_button()
 	
-	for device in Input.get_connected_joypads():
-		_add_controls(device)
-		_on_add_player_button_pressed()
-	
 	# all non-ui controls get added to cursor controls
 	for control in InputMap.get_actions():
 		if !control.begins_with("ui"):
 			cursor_controls.append(control)
+	
+	for device in Input.get_connected_joypads():
+		_add_controls(device)
+		_on_add_player_button_pressed()
 
 
 # if an id is not found, the controllers id will be -1
