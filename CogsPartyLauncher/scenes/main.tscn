@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://k31chn02rvs2"]
+[gd_scene load_steps=28 format=3 uid="uid://k31chn02rvs2"]
 
 [ext_resource type="Theme" uid="uid://036n6qd3ik2g" path="res://assets/theme.tres" id="1_erdau"]
 [ext_resource type="Script" uid="uid://du6vnjc42pp0f" path="res://scripts/main_menu.gd" id="2_6njpl"]
@@ -94,6 +94,14 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_muem4"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_dp3eg"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0ld40"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gqmmt"]
+
 [node name="Main" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -101,6 +109,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+focus_behavior_recursive = 1
 theme = ExtResource("1_erdau")
 
 [node name="GameLibrary" type="Node" parent="."]
@@ -461,3 +470,32 @@ text = "- Alina Tong (Atlinx)"
 [node name="GameLibraryDisplay" parent="Menus/MainMenu" instance=ExtResource("11_gn2ub")]
 layout_mode = 2
 display_mode = true
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="LeftBorder" type="StaticBody2D" parent="Node2D"]
+position = Vector2(0, 317)
+rotation = 1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/LeftBorder"]
+shape = SubResource("WorldBoundaryShape2D_muem4")
+
+[node name="RightBorder" type="StaticBody2D" parent="Node2D"]
+position = Vector2(1152, 308)
+rotation = -1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/RightBorder"]
+shape = SubResource("WorldBoundaryShape2D_dp3eg")
+
+[node name="TopBorder" type="StaticBody2D" parent="Node2D"]
+position = Vector2(587, 0)
+rotation = -3.1415927
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/TopBorder"]
+shape = SubResource("WorldBoundaryShape2D_0ld40")
+
+[node name="BottomBorder" type="StaticBody2D" parent="Node2D"]
+position = Vector2(593, 648)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/BottomBorder"]
+shape = SubResource("WorldBoundaryShape2D_gqmmt")

@@ -155,12 +155,14 @@ func _on_player_count_changed():
 
 
 func _on_add_player_button_pressed():
+	var root = get_tree().current_scene
 	var player_cursor = player_cursor_prefab.instantiate() as CharacterBody2D
 	var id = _get_next_id()
 	_add_taken_id(id)
+	player_cursor.position = Vector2(randi_range(476,676), randi_range(224,424))
 	player_cursor.controller_id = id
 	player_cursors.append(player_cursor)
-	add_child(player_cursor)
+	root.add_child.call_deferred(player_cursor)
 	
 	var inst = player_setting_prefab.instantiate() as PlayerSetting
 	player_setting_container.add_child(inst)
@@ -198,24 +200,29 @@ func _on_player_setting_removed(player_setting: PlayerSetting):
 
 func _on_joy_connection_changed(device_id: int, connected: bool):
 	if connected:
-		# adds InputMap for the new device if needed
 		_add_controls(device_id)
+		_reset_controller_ids()
 		
-		# check if there is an unlinked cursor
-		for cursor in player_cursors:
-			if cursor.controller_id == -1:
-				_add_taken_id(device_id)
-				cursor.controller_id = device_id
-				break
 		# if we need to make a new cursor
-		if not taken_ids.has(device_id):
-			_on_add_player_button_pressed()
+		for device in Input.get_connected_joypads():
+			if not taken_ids.has(device):
+				_on_add_player_button_pressed()
 	else:
-		for cursor in player_cursors:
-			if cursor.controller_id == device_id:
-				_remove_taken_id(device_id)
-				cursor.controller_id = -1
-			break
+		_reset_controller_ids()
+
+
+# maps first available cursor to first available controller_id
+func _reset_controller_ids():
+	var devices = Input.get_connected_joypads()
+	
+	taken_ids.clear()
+	for cursor in player_cursors:
+		cursor.controller_id = -1
+		for device in devices:
+			if not taken_ids.has(device):
+				taken_ids[device] = null
+				cursor.controller_id = device
+				break
 
 
 func _add_controls(device_id: int):
@@ -231,8 +238,7 @@ func _add_controls(device_id: int):
 				if new_event is InputEventJoypadButton or new_event is InputEventJoypadMotion:
 					new_event.device = device_id
 					InputMap.action_add_event(action_name, new_event)
-			
-	
+
 
 func _on_game_library_display_changed():
 	_update_play_button()

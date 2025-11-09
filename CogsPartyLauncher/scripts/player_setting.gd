@@ -49,6 +49,7 @@ func _update_color():
 
 
 func _update_player_name():
+	player_cursor.update_player_label(player_number)
 	player_name_label.text = "P%d" % player_number
 
 

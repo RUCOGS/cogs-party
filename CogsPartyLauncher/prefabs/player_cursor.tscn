@@ -1,18 +1,32 @@
-[gd_scene load_steps=4 format=3 uid="uid://e4ln8snjshya"]
+[gd_scene load_steps=5 format=3 uid="uid://e4ln8snjshya"]
 
 [ext_resource type="Script" uid="uid://cwxj0xadxq00r" path="res://scripts/player_cursor.gd" id="1_kanx7"]
-[ext_resource type="Texture2D" uid="uid://khbpvrknrsi" path="res://assets/cog_logo.png" id="2_d6s4y"]
+[ext_resource type="Texture2D" uid="uid://4h2spm8tmhuc" path="res://assets/CogsPartyCursor.png" id="2_d6s4y"]
+[ext_resource type="FontFile" uid="uid://nrweasq5la54" path="res://assets/urbanist/static/Urbanist-ExtraBold.ttf" id="3_0didb"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_mti1b"]
-radius = 243.03291
+radius = 585.6862
 
-[node name="CharacterBody2D" type="CharacterBody2D"]
-scale = Vector2(0.25, 0.25)
+[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("player_name_label")]
+scale = Vector2(0.05, 0.05)
+motion_mode = 1
 script = ExtResource("1_kanx7")
+player_name_label = NodePath("Label")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(588.1667, 588.6667)
 shape = SubResource("CircleShape2D_mti1b")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+position = Vector2(588.1667, 588.6667)
 texture = ExtResource("2_d6s4y")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 200.0
+offset_top = 100.00001
+offset_right = 739.99994
+offset_bottom = 474.0
+theme_override_fonts/font = ExtResource("3_0didb")
+theme_override_font_sizes/font_size = 311
+text = "P1"
