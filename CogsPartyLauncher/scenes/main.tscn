@@ -471,31 +471,31 @@ text = "- Alina Tong (Atlinx)"
 layout_mode = 2
 display_mode = true
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="WorldBorders" type="Node2D" parent="."]
 
-[node name="LeftBorder" type="StaticBody2D" parent="Node2D"]
+[node name="LeftBorder" type="StaticBody2D" parent="WorldBorders"]
 position = Vector2(0, 317)
 rotation = 1.5707964
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/LeftBorder"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorders/LeftBorder"]
 shape = SubResource("WorldBoundaryShape2D_muem4")
 
-[node name="RightBorder" type="StaticBody2D" parent="Node2D"]
+[node name="RightBorder" type="StaticBody2D" parent="WorldBorders"]
 position = Vector2(1152, 308)
 rotation = -1.5707964
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/RightBorder"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorders/RightBorder"]
 shape = SubResource("WorldBoundaryShape2D_dp3eg")
 
-[node name="TopBorder" type="StaticBody2D" parent="Node2D"]
+[node name="TopBorder" type="StaticBody2D" parent="WorldBorders"]
 position = Vector2(587, 0)
 rotation = -3.1415927
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/TopBorder"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorders/TopBorder"]
 shape = SubResource("WorldBoundaryShape2D_0ld40")
 
-[node name="BottomBorder" type="StaticBody2D" parent="Node2D"]
+[node name="BottomBorder" type="StaticBody2D" parent="WorldBorders"]
 position = Vector2(593, 648)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/BottomBorder"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorders/BottomBorder"]
 shape = SubResource("WorldBoundaryShape2D_gqmmt")

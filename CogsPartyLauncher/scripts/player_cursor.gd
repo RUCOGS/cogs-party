@@ -1,11 +1,16 @@
 extends CharacterBody2D
 
 @export var speed: float = 30000.0
-
 @export var player_name_label: Label
 
 # unlinked cursors have an ID of -1
 var controller_id: int = 0
+
+
+func construct(cursor_position: Vector2, id: int):
+	position = cursor_position
+	controller_id = id
+
 
 func _physics_process(delta):
 	if controller_id != -1:

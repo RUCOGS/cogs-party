@@ -29,22 +29,23 @@ func _ready():
 	self.visibility_changed.connect(_on_visible_changed)
 	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	_update_add_player_button()
-	
-	# all non-ui controls get added to cursor controls
-	for control in InputMap.get_actions():
-		if !control.begins_with("ui"):
-			cursor_controls.append(control)
+	_get_non_ui_controls()
 	
 	for device in Input.get_connected_joypads():
 		_add_controls(device)
 		_on_add_player_button_pressed()
 
 
+func _get_non_ui_controls():
+	for control in InputMap.get_actions():
+		if !control.begins_with("ui"):
+			cursor_controls.append(control)
+
+
 # if an id is not found, the controllers id will be -1
 func _get_next_id() -> int:
 	var found_id = -1
 	var devices = Input.get_connected_joypads()
-	devices.sort()
 	
 	for device_id in devices:
 		if not taken_ids.has(device_id):
@@ -151,18 +152,20 @@ func _on_player_count_changed():
 	_update_game_library_display()
 	_update_add_player_button()
 	_update_play_button()
-	
 
 
 func _on_add_player_button_pressed():
-	var root = get_tree().current_scene
+	var main = get_tree().current_scene
 	var player_cursor = player_cursor_prefab.instantiate() as CharacterBody2D
 	var id = _get_next_id()
 	_add_taken_id(id)
-	player_cursor.position = Vector2(randi_range(476,676), randi_range(224,424))
-	player_cursor.controller_id = id
+	player_cursor.construct(
+		Vector2(randi_range(476,676), randi_range(224,424)),
+		id
+	)
 	player_cursors.append(player_cursor)
-	root.add_child.call_deferred(player_cursor)
+	main.add_child.call_deferred(player_cursor)
+	
 	
 	var inst = player_setting_prefab.instantiate() as PlayerSetting
 	player_setting_container.add_child(inst)
@@ -187,7 +190,8 @@ func _on_player_setting_removed(player_setting: PlayerSetting):
 		next_focus_control.remove_button.grab_focus()
 	else:
 		next_focus_control.grab_focus()
-
+		
+	# delete cursor
 	_remove_taken_id(player_setting.player_cursor.controller_id)
 	player_cursors.erase(player_setting.player_cursor)
 	player_setting.player_cursor.queue_free()
