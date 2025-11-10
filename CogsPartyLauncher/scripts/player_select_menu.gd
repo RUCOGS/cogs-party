@@ -139,7 +139,7 @@ func _update_game_library_display():
 
 func _on_visible_changed():
 	if self.visible:
-		back_button.grab_focus()
+		# back_button.grab_focus()
 		_update_game_library_display()
 
 
@@ -187,9 +187,9 @@ func _on_player_setting_removed(player_setting: PlayerSetting):
 		next_focus_idx = player_setting_container.get_child_count() - 1
 	var next_focus_control = player_setting_container.get_child(next_focus_idx) as Control
 	if next_focus_control is PlayerSetting:
-		next_focus_control.remove_button.grab_focus()
+		pass # next_focus_control.remove_button.grab_focus()
 	else:
-		next_focus_control.grab_focus()
+		pass # next_focus_control.grab_focus()
 		
 	# delete cursor
 	_remove_taken_id(player_setting.player_cursor.controller_id)
