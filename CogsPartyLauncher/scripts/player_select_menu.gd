@@ -195,6 +195,7 @@ func _on_player_setting_removed(player_setting: PlayerSetting):
 	player_setting_container.remove_child(player_setting)
 	player_setting.queue_free()
 	player_settings.erase(player_setting)
+	_reset_controller_ids()
 	_on_player_count_changed()
 
 
