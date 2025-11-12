@@ -57,8 +57,8 @@ func _load_preferences():
 
 
 func _on_visible_changed():
-	if self.visible:
-		play_button.grab_focus()
+	if self.visible and play_button.focus_mode != Control.FOCUS_NONE:
+		pass # play_button.grab_focus()
 
 
 func _on_refresh_games_button_pressed():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://k31chn02rvs2"]
+[gd_scene load_steps=28 format=3 uid="uid://k31chn02rvs2"]
 
 [ext_resource type="Theme" uid="uid://036n6qd3ik2g" path="res://assets/theme.tres" id="1_erdau"]
 [ext_resource type="Script" uid="uid://du6vnjc42pp0f" path="res://scripts/main_menu.gd" id="2_6njpl"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" uid="uid://dhvwntodxsxdv" path="res://scripts/game_library.gd" id="7_afary"]
 [ext_resource type="Texture2D" uid="uid://uc8pxnfjvsmj" path="res://assets/icon_reload.svg" id="7_ywnar"]
 [ext_resource type="PackedScene" uid="uid://c24hlo57mf44p" path="res://prefabs/player_setting.tscn" id="8_g7i7g"]
+[ext_resource type="PackedScene" uid="uid://e4ln8snjshya" path="res://prefabs/player_cursor.tscn" id="8_muem4"]
 [ext_resource type="Texture2D" uid="uid://c27ucuw3vtgn6" path="res://assets/icon_add.svg" id="9_f0lwm"]
 [ext_resource type="Script" uid="uid://bp3vaw5ln4p3n" path="res://scripts/lobby_menu.gd" id="9_iaqec"]
 [ext_resource type="PackedScene" uid="uid://ccybwxdqx3qi7" path="res://prefabs/lobby_player.tscn" id="10_ewmxw"]
@@ -93,6 +94,14 @@ corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
 
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_muem4"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_dp3eg"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_0ld40"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_gqmmt"]
+
 [node name="Main" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -100,6 +109,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+focus_behavior_recursive = 1
 theme = ExtResource("1_erdau")
 
 [node name="GameLibrary" type="Node" parent="."]
@@ -139,6 +149,7 @@ theme_override_constants/separation = 32
 alignment = 1
 script = ExtResource("6_v4hmo")
 player_setting_prefab = ExtResource("8_g7i7g")
+player_cursor_prefab = ExtResource("8_muem4")
 player_setting_container = NodePath("HBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/PlayerSettingContainer")
 add_player_button = NodePath("HBoxContainer2/PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/PlayerSettingContainer/AddPlayerButton")
 player_colors = Array[Color]([Color(1, 0.12549, 0.12549, 1), Color(1, 0.52549, 0.266667, 1), Color(1, 0.933333, 0.235294, 1), Color(0.686275, 1, 0.309804, 1), Color(0.211765, 0.898039, 0.333333, 1), Color(0.290196, 0.905882, 0.952941, 1), Color(0.305882, 0.345098, 0.960784, 1), Color(0.698039, 0.266667, 0.964706, 1), Color(0.996078, 0.266667, 1, 1), Color(1, 1, 1, 1), Color(0.564706, 0.564706, 0.564706, 1), Color(0.223529, 0.223529, 0.223529, 1)])
@@ -459,3 +470,32 @@ text = "- Alina Tong (Atlinx)"
 [node name="GameLibraryDisplay" parent="Menus/MainMenu" instance=ExtResource("11_gn2ub")]
 layout_mode = 2
 display_mode = true
+
+[node name="WorldBorders" type="Node2D" parent="."]
+
+[node name="LeftBorder" type="StaticBody2D" parent="WorldBorders"]
+position = Vector2(0, 317)
+rotation = 1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorders/LeftBorder"]
+shape = SubResource("WorldBoundaryShape2D_muem4")
+
+[node name="RightBorder" type="StaticBody2D" parent="WorldBorders"]
+position = Vector2(1152, 308)
+rotation = -1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorders/RightBorder"]
+shape = SubResource("WorldBoundaryShape2D_dp3eg")
+
+[node name="TopBorder" type="StaticBody2D" parent="WorldBorders"]
+position = Vector2(587, 0)
+rotation = -3.1415927
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorders/TopBorder"]
+shape = SubResource("WorldBoundaryShape2D_0ld40")
+
+[node name="BottomBorder" type="StaticBody2D" parent="WorldBorders"]
+position = Vector2(593, 648)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldBorders/BottomBorder"]
+shape = SubResource("WorldBoundaryShape2D_gqmmt")
