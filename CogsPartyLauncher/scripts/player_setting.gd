@@ -12,13 +12,15 @@ signal updated()
 
 
 var player_number: int = 1
+var player_cursor: CharacterBody2D
 var player_color: Color
 var next_color_option
 var prev_color_option
 
 
-func construct(number: int, color: Color):
+func construct(number: int, cursor: CharacterBody2D, color: Color):
 	player_number = number
+	player_cursor = cursor
 	player_color = color
 	_update_player_name()
 	_update_color()
@@ -42,10 +44,12 @@ func _ready():
 func _update_color():
 	var stylebox = get_theme_stylebox("panel").duplicate(true) as StyleBoxFlat
 	stylebox.border_color = player_color
+	player_cursor.update_color(player_color)
 	add_theme_stylebox_override("panel", stylebox)
 
 
 func _update_player_name():
+	player_cursor.update_player_label(player_number)
 	player_name_label.text = "P%d" % player_number
 
 

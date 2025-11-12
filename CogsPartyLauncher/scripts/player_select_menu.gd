@@ -3,6 +3,7 @@ class_name PlayerSelectMenu
 
 
 @export var player_setting_prefab: PackedScene
+@export var player_cursor_prefab: PackedScene
 @export var player_setting_container: Control
 @export var add_player_button: Button
 @export var player_colors: Array[Color]
@@ -12,8 +13,12 @@ class_name PlayerSelectMenu
 @export var menu_navigator: MenuNavigator
 @export var game_library_display: GameLibraryDisplay
 
+
 var player_settings: Array[PlayerSetting]
+var player_cursors: Array[CharacterBody2D]
+var cursor_controls: Array[String]
 var taken_colors: Dictionary = {}
+var taken_ids: Dictionary = {}
 
 
 func _ready():
@@ -22,7 +27,39 @@ func _ready():
 	back_button.pressed.connect(menu_navigator.load_menu.bind("MainMenu"))
 	game_library_display.changed.connect(_on_game_library_display_changed)
 	self.visibility_changed.connect(_on_visible_changed)
+	Input.joy_connection_changed.connect(_on_joy_connection_changed)
 	_update_add_player_button()
+	_get_non_ui_controls()
+	
+	for device in Input.get_connected_joypads():
+		_add_controls(device)
+		_on_add_player_button_pressed()
+
+
+func _get_non_ui_controls():
+	for control in InputMap.get_actions():
+		if !control.begins_with("ui"):
+			cursor_controls.append(control)
+
+
+# if an id is not found, the controllers id will be -1
+func _get_next_id() -> int:
+	var found_id = -1
+	var devices = Input.get_connected_joypads()
+	
+	for device_id in devices:
+		if not taken_ids.has(device_id):
+			found_id = device_id
+			break
+	return found_id
+
+
+func _add_taken_id(device_id: int):
+	taken_ids[device_id] = null
+
+
+func _remove_taken_id(device_id: int):
+	taken_ids.erase(device_id)
 
 
 func _get_available_colors() -> Array[Color]:
@@ -102,7 +139,7 @@ func _update_game_library_display():
 
 func _on_visible_changed():
 	if self.visible:
-		back_button.grab_focus()
+		# back_button.grab_focus()
 		_update_game_library_display()
 
 
@@ -115,17 +152,29 @@ func _on_player_count_changed():
 	_update_game_library_display()
 	_update_add_player_button()
 	_update_play_button()
-	
 
 
 func _on_add_player_button_pressed():
+	var main = get_tree().current_scene
+	var player_cursor = player_cursor_prefab.instantiate() as CharacterBody2D
+	var id = _get_next_id()
+	_add_taken_id(id)
+	player_cursor.construct(
+		Vector2(randi_range(476,676), randi_range(224,424)),
+		id
+	)
+	player_cursors.append(player_cursor)
+	main.add_child.call_deferred(player_cursor)
+	
+	
 	var inst = player_setting_prefab.instantiate() as PlayerSetting
 	player_setting_container.add_child(inst)
 	player_setting_container.move_child(inst, player_setting_container.get_child_count() - 2)
 	inst.updated.connect(_on_player_setting_updated)
 	inst.removed.connect(_on_player_setting_removed.bind(inst))
 	inst.construct(
-		player_settings.size() + 1, 
+		player_settings.size() + 1,
+		player_cursor, 
 		_get_next_available_color_or_self()
 	)
 	player_settings.append(inst)
@@ -138,14 +187,62 @@ func _on_player_setting_removed(player_setting: PlayerSetting):
 		next_focus_idx = player_setting_container.get_child_count() - 1
 	var next_focus_control = player_setting_container.get_child(next_focus_idx) as Control
 	if next_focus_control is PlayerSetting:
-		next_focus_control.remove_button.grab_focus()
+		pass # next_focus_control.remove_button.grab_focus()
 	else:
-		next_focus_control.grab_focus()
+		pass # next_focus_control.grab_focus()
+		
+	# delete cursor
+	_remove_taken_id(player_setting.player_cursor.controller_id)
+	player_cursors.erase(player_setting.player_cursor)
+	player_setting.player_cursor.queue_free()
 
 	player_setting_container.remove_child(player_setting)
 	player_setting.queue_free()
 	player_settings.erase(player_setting)
+	_reset_controller_ids()
 	_on_player_count_changed()
+
+
+func _on_joy_connection_changed(device_id: int, connected: bool):
+	if connected:
+		_add_controls(device_id)
+		_reset_controller_ids()
+		
+		# if we need to make a new cursor
+		for device in Input.get_connected_joypads():
+			if not taken_ids.has(device):
+				_on_add_player_button_pressed()
+	else:
+		_reset_controller_ids()
+
+
+# maps first available cursor to first available controller_id
+func _reset_controller_ids():
+	var devices = Input.get_connected_joypads()
+	
+	taken_ids.clear()
+	for cursor in player_cursors:
+		cursor.controller_id = -1
+		for device in devices:
+			if not taken_ids.has(device):
+				taken_ids[device] = null
+				cursor.controller_id = device
+				break
+
+
+func _add_controls(device_id: int):
+	for control in cursor_controls:
+		var action_name = control + str(device_id)
+			
+		if not InputMap.has_action(action_name):
+			InputMap.add_action(action_name)
+				
+			for event in InputMap.action_get_events(control):
+				var new_event = event.duplicate()
+					
+				if new_event is InputEventJoypadButton or new_event is InputEventJoypadMotion:
+					new_event.device = device_id
+					InputMap.action_add_event(action_name, new_event)
 
 
 func _on_game_library_display_changed():
