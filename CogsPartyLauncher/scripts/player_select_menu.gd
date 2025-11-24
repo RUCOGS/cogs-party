@@ -155,17 +155,7 @@ func _on_player_count_changed():
 
 
 func _on_add_player_button_pressed():
-	var main = get_tree().current_scene
-	var player_cursor = player_cursor_prefab.instantiate() as CharacterBody2D
-	var id = _get_next_id()
-	_add_taken_id(id)
-	player_cursor.construct(
-		Vector2(randi_range(476,676), randi_range(224,424)),
-		id
-	)
-	player_cursors.append(player_cursor)
-	main.add_child.call_deferred(player_cursor)
-	
+	var player_cursor = _create_new_cursor()
 	
 	var inst = player_setting_prefab.instantiate() as PlayerSetting
 	player_setting_container.add_child(inst)
@@ -178,6 +168,7 @@ func _on_add_player_button_pressed():
 		_get_next_available_color_or_self()
 	)
 	player_settings.append(inst)
+	_create_file_dialog_cursor(player_cursor)
 	_on_player_count_changed()
 
 
@@ -201,6 +192,33 @@ func _on_player_setting_removed(player_setting: PlayerSetting):
 	player_settings.erase(player_setting)
 	_reset_controller_ids()
 	_on_player_count_changed()
+
+
+func _create_new_cursor() -> CharacterBody2D:
+	var player_cursor = player_cursor_prefab.instantiate() as CharacterBody2D
+	var id = _get_next_id()
+	_add_taken_id(id)
+	
+	player_cursor.construct(
+		Vector2(randi_range(476,676), randi_range(224,424)),
+		id
+	)
+	player_cursors.append(player_cursor)
+	get_tree().current_scene.add_child.call_deferred(player_cursor)
+	return player_cursor
+
+
+func _create_file_dialog_cursor(player_cursor: CharacterBody2D):
+	var file_dialog_cursor = player_cursor.duplicate()
+	var controller_id: int = player_cursor.controller_id
+	var main_menu = get_tree().current_scene.find_child("Menus").find_child("MainMenu")
+	
+	file_dialog_cursor.construct(
+		Vector2(randi_range(476,676), randi_range(224,424)),
+		controller_id
+	)
+	if main_menu != null:
+		main_menu.games_folder_select_file_dialog.add_child(file_dialog_cursor)
 
 
 func _on_joy_connection_changed(device_id: int, connected: bool):
