@@ -3,11 +3,12 @@ extends CharacterBody2D
 @export var speed: float = 30000.0
 @export var player_name_label: Label
 
-# unlinked cursors have an ID of -1
-var controller_id: int = 0
+const DOUBLE_CLICK_THRESHOLD: float = 0.5
 
-# reference to a matching cursor used to navigate the file dialog from the edit button on the main menu
-var file_dialog_cursor: CharacterBody2D
+var controller_id: int = 0 # unlinked cursors have an id of -1
+var file_dialog_cursor: CharacterBody2D # reference to matching cursor in main menus file dialog
+var last_click: float # last time the player clicked (double click detection)
+var elapsed_time: float = 0.0
 
 
 func construct(cursor_position: Vector2, id: int):
@@ -15,7 +16,13 @@ func construct(cursor_position: Vector2, id: int):
 	controller_id = id
 
 
+func get_id() -> int:
+	return controller_id
+
+
 func _physics_process(delta):
+	elapsed_time += delta
+	
 	if controller_id != -1:
 		var direction = Input.get_vector(
 			"left%s" % [controller_id],
@@ -23,12 +30,11 @@ func _physics_process(delta):
 			"up%s" % [controller_id],
 			"down%s" % [controller_id]
 		)
-		
 		var rs_strength = abs(Input.get_axis("scroll_down", "scroll_up"))
 		
 		velocity = direction * speed * delta
 		move_and_slide()
-		
+			
 		if Input.is_action_pressed("scroll_up%s" % [controller_id]):
 			_simulate_scroll(MOUSE_BUTTON_WHEEL_UP, rs_strength)
 		elif Input.is_action_pressed("scroll_down%s" % [controller_id]):
@@ -38,27 +44,29 @@ func _physics_process(delta):
 			_simulate_stop_scroll(MOUSE_BUTTON_WHEEL_DOWN)
 
 
-func get_id() -> int:
-	return controller_id
-
-
 func _input(event: InputEvent) -> void:
 	if controller_id != -1:
 		if event.is_action_pressed("select%s" % [controller_id]):
-			_simulate_mouse_click()
+				if elapsed_time - last_click <= DOUBLE_CLICK_THRESHOLD:
+					_simulate_mouse_click(true)
+				else:
+					_simulate_mouse_click(false)
+				last_click = elapsed_time
 
 
-func _simulate_mouse_click():
+func _simulate_mouse_click(double_click: bool):
 	var click_pos = get_viewport().get_screen_transform() * position
 	
 	var press = InputEventMouseButton.new()
 	press.button_index = MOUSE_BUTTON_LEFT
+	press.double_click = double_click
 	press.position = click_pos
 	press.pressed = true
 	Input.parse_input_event(press)
 
 	var release = InputEventMouseButton.new()
 	release.button_index = MOUSE_BUTTON_LEFT
+	release.double_click = double_click
 	release.position = click_pos
 	release.pressed = false
 	Input.parse_input_event(release)
