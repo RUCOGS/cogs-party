@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://k31chn02rvs2"]
+[gd_scene load_steps=32 format=3 uid="uid://k31chn02rvs2"]
 
 [ext_resource type="Theme" uid="uid://036n6qd3ik2g" path="res://assets/theme.tres" id="1_erdau"]
 [ext_resource type="Script" uid="uid://du6vnjc42pp0f" path="res://scripts/main_menu.gd" id="2_6njpl"]
@@ -93,6 +93,14 @@ corner_radius_top_left = 4
 corner_radius_top_right = 4
 corner_radius_bottom_right = 4
 corner_radius_bottom_left = 4
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yc10j"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_jscy8"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_pm3ni"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_y6deb"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_muem4"]
 
@@ -435,10 +443,39 @@ layout_mode = 2
 text = "E D I T"
 
 [node name="GamesFolderSelectFileDialog" type="FileDialog" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton"]
+oversampling_override = 1.0
 title = "Open a Directory"
 ok_button_text = "Select Current Folder"
 file_mode = 2
 access = 2
+
+[node name="BottomBorder" type="StaticBody2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog"]
+position = Vector2(599, 562)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog/BottomBorder"]
+shape = SubResource("WorldBoundaryShape2D_yc10j")
+
+[node name="TopBorder" type="StaticBody2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog"]
+position = Vector2(613, 514)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog/TopBorder"]
+position = Vector2(1, -533)
+rotation = 3.1415927
+shape = SubResource("WorldBoundaryShape2D_jscy8")
+
+[node name="RightBorder" type="StaticBody2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog"]
+position = Vector2(966, 288)
+rotation = -1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog/RightBorder"]
+shape = SubResource("WorldBoundaryShape2D_pm3ni")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog"]
+position = Vector2(-23, 282)
+rotation = 1.5707964
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog/StaticBody2D"]
+shape = SubResource("WorldBoundaryShape2D_y6deb")
 
 [node name="GamesFolderLabel" type="Label" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
 layout_mode = 2
