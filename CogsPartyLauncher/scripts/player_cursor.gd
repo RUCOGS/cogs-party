@@ -6,6 +6,9 @@ extends CharacterBody2D
 # unlinked cursors have an ID of -1
 var controller_id: int = 0
 
+# reference to a matching cursor used to navigate the file dialog from the edit button on the main menu
+var file_dialog_cursor: CharacterBody2D
+
 
 func construct(cursor_position: Vector2, id: int):
 	position = cursor_position
@@ -33,6 +36,10 @@ func _physics_process(delta):
 		else:
 			_simulate_stop_scroll(MOUSE_BUTTON_WHEEL_UP)
 			_simulate_stop_scroll(MOUSE_BUTTON_WHEEL_DOWN)
+
+
+func get_id() -> int:
+	return controller_id
 
 
 func _input(event: InputEvent) -> void:
@@ -77,7 +84,17 @@ func _simulate_stop_scroll(direction: MouseButton):
 
 func update_player_label(player_number: int):
 	player_name_label.text = "P%d" % player_number
+	if file_dialog_cursor != null:
+		file_dialog_cursor.update_player_label(player_number)
 
 
 func update_color(color: Color):
 	$Sprite2D.modulate = color
+	if file_dialog_cursor != null:
+		file_dialog_cursor.update_color(color)
+
+
+func update_id(id: int):
+	controller_id = id
+	if file_dialog_cursor != null:
+		file_dialog_cursor.update_id(id)

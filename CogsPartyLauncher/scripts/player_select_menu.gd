@@ -182,10 +182,12 @@ func _on_player_setting_removed(player_setting: PlayerSetting):
 	else:
 		pass # next_focus_control.grab_focus()
 		
-	# delete cursor
-	_remove_taken_id(player_setting.player_cursor.controller_id)
+	# delete cursor and its file dialog duplicate
+	_remove_taken_id(player_setting.player_cursor.get_id())
 	player_cursors.erase(player_setting.player_cursor)
+	player_setting.player_cursor.file_dialog_cursor.queue_free()
 	player_setting.player_cursor.queue_free()
+	
 
 	player_setting_container.remove_child(player_setting)
 	player_setting.queue_free()
@@ -210,12 +212,14 @@ func _create_new_cursor() -> CharacterBody2D:
 
 func _create_file_dialog_cursor(player_cursor: CharacterBody2D):
 	var file_dialog_cursor = player_cursor.duplicate()
-	var controller_id: int = player_cursor.controller_id
 	var main_menu = get_tree().current_scene.find_child("Menus").find_child("MainMenu")
+	
+	# gives the original player cursor a reference to the duplicate used in the file dialog
+	player_cursor.file_dialog_cursor = file_dialog_cursor
 	
 	file_dialog_cursor.construct(
 		Vector2(randi_range(476,676), randi_range(224,424)),
-		controller_id
+		player_cursor.get_id()
 	)
 	if main_menu != null:
 		main_menu.games_folder_select_file_dialog.add_child(file_dialog_cursor)
@@ -240,11 +244,11 @@ func _reset_controller_ids():
 	
 	taken_ids.clear()
 	for cursor in player_cursors:
-		cursor.controller_id = -1
+		cursor.update_id(-1)
 		for device in devices:
 			if not taken_ids.has(device):
 				taken_ids[device] = null
-				cursor.controller_id = device
+				cursor.update_id(device)
 				break
 
 
