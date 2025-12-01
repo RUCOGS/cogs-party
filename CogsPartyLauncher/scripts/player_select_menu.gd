@@ -31,6 +31,7 @@ func _ready():
 	_update_add_player_button()
 	_get_non_ui_controls()
 	
+	
 	for device in Input.get_connected_joypads():
 		_add_controls(device)
 		_on_add_player_button_pressed()

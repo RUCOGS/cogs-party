@@ -47,10 +47,11 @@ func _physics_process(delta):
 func _input(event: InputEvent) -> void:
 	if controller_id != -1:
 		if event.is_action_pressed("select%s" % [controller_id]):
-				if elapsed_time - last_click <= DOUBLE_CLICK_THRESHOLD:
-					_simulate_mouse_click(true)
-				else:
-					_simulate_mouse_click(false)
+			if elapsed_time - last_click <= DOUBLE_CLICK_THRESHOLD:
+				_simulate_mouse_click(true)
+				last_click = 0
+			else:
+				_simulate_mouse_click(false)
 				last_click = elapsed_time
 
 
