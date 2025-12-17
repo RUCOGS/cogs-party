@@ -450,7 +450,7 @@ file_mode = 2
 access = 2
 
 [node name="BottomBorder" type="StaticBody2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog"]
-position = Vector2(599, 562)
+position = Vector2(599, 638)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog/BottomBorder"]
 shape = SubResource("WorldBoundaryShape2D_yc10j")
@@ -464,17 +464,17 @@ rotation = 3.1415927
 shape = SubResource("WorldBoundaryShape2D_jscy8")
 
 [node name="RightBorder" type="StaticBody2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog"]
-position = Vector2(966, 288)
+position = Vector2(1115, 288)
 rotation = -1.5707964
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog/RightBorder"]
 shape = SubResource("WorldBoundaryShape2D_pm3ni")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog"]
+[node name="LeftBorder" type="StaticBody2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog"]
 position = Vector2(-23, 282)
 rotation = 1.5707964
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog/StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog/LeftBorder"]
 shape = SubResource("WorldBoundaryShape2D_y6deb")
 
 [node name="GamesFolderLabel" type="Label" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
