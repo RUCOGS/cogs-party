@@ -6,6 +6,7 @@
 [ext_resource type="Material" uid="uid://b87yd308vxbfo" path="res://assets/rainbow_material.tres" id="2_o310u"]
 [ext_resource type="Texture2D" uid="uid://86474c6ugxyg" path="res://assets/sgj_poster.png" id="3_6h253"]
 [ext_resource type="FontFile" uid="uid://bg4kldgugtb2r" path="res://assets/urbanist/static/Urbanist-Black.ttf" id="4_jhk8j"]
+[ext_resource type="Texture2D" uid="uid://dvilwnyh1kf8g" path="res://assets/nintendo-switch-2_sheet_default.png" id="6_dp3eg"]
 [ext_resource type="PackedScene" uid="uid://b3fh8hsqlpcp2" path="res://prefabs/game_entry.tscn" id="6_eeign"]
 [ext_resource type="Script" uid="uid://7rqb3xfjladw" path="res://scripts/player_select_menu.gd" id="6_v4hmo"]
 [ext_resource type="Script" uid="uid://dhvwntodxsxdv" path="res://scripts/game_library.gd" id="7_afary"]
@@ -17,7 +18,6 @@
 [ext_resource type="PackedScene" uid="uid://ccybwxdqx3qi7" path="res://prefabs/lobby_player.tscn" id="10_ewmxw"]
 [ext_resource type="PackedScene" uid="uid://bp0606lonchki" path="res://prefabs/game_library_display.tscn" id="11_gn2ub"]
 [ext_resource type="Texture2D" uid="uid://cgjaoni88rsk0" path="res://assets/COGS Party.png" id="15_jbj1t"]
-[ext_resource type="Script" uid="uid://1mtsd2cdtks" path="res://scripts/world_borders.gd" id="18_dp3eg"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_muem4"]
 
@@ -220,6 +220,69 @@ grow_vertical = 2
 texture = ExtResource("3_6h253")
 expand_mode = 1
 stretch_mode = 6
+
+[node name="Panel" type="Panel" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.46100003
+anchor_top = 0.47000003
+anchor_right = 0.531
+anchor_bottom = 0.536
+offset_left = -346.07202
+offset_top = 287.43997
+offset_right = -115.712036
+offset_bottom = 288.672
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="TextureRect/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextureRect/Panel/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 70
+
+[node name="Label" type="Label" parent="TextureRect/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Move"
+
+[node name="NintendoSwitch2SheetDefault" type="Sprite2D" parent="TextureRect/Panel/MarginContainer/HBoxContainer/Label"]
+position = Vector2(162, 11)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_dp3eg")
+region_enabled = true
+region_rect = Rect2(319.10547, 447.8345, 67.34436, 63.776215)
+
+[node name="Label2" type="Label" parent="TextureRect/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Click"
+
+[node name="NintendoSwitch2SheetDefault" type="Sprite2D" parent="TextureRect/Panel/MarginContainer/HBoxContainer/Label2"]
+position = Vector2(-53.5, 12)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_dp3eg")
+region_enabled = true
+region_rect = Rect2(253.00052, 127.900116, 69.30008, 66.00009)
+
+[node name="Label3" type="Label" parent="TextureRect/Panel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+text = "Scroll"
+
+[node name="NintendoSwitch2SheetDefault2" type="Sprite2D" parent="TextureRect/Panel/MarginContainer/HBoxContainer/Label3"]
+position = Vector2(55.5, 11.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_dp3eg")
+region_enabled = true
+region_rect = Rect2(2.0004883, 64.00028, 64.00009, 63.000107)
 
 [node name="Menus" type="MarginContainer" parent="."]
 layout_mode = 1
