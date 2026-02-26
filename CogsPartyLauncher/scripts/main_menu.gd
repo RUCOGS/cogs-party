@@ -66,8 +66,6 @@ func _on_refresh_games_button_pressed():
 
 
 func _on_games_folder_select_pressed():
-	# NOTE: if you change this, you will also need to adjust the WorldBorders containing the cursors
-	# under the GamesFolderSelectFileDialog
 	games_folder_select_file_dialog.popup_centered_ratio(0.93)
 	
 

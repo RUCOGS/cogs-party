@@ -651,7 +651,8 @@ text = "C R E D I T S"
 
 [node name="CreditsLabel" type="Label" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer2"]
 layout_mode = 2
-text = "- Alina Tong (Atlinx)"
+text = "- Alina Tong (Atlinx)
+- Justin Liang (utinj)"
 
 [node name="GameLibraryDisplay" parent="Menus/MainMenu" instance=ExtResource("11_gn2ub")]
 layout_mode = 2
