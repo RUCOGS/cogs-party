@@ -506,7 +506,7 @@ text = "P L A Y I N G"
 layout_mode = 2
 display_mode = true
 
-[node name="MainMenu" type="HBoxContainer" parent="Menus" node_paths=PackedStringArray("play_button", "quit_game_button", "games_folder_select_button", "games_folder_select_file_dialog", "games_folder_label", "game_library", "menu_navigator", "game_library_display", "refresh_games_button")]
+[node name="MainMenu" type="HBoxContainer" parent="Menus" node_paths=PackedStringArray("play_button", "quit_game_button", "games_folder_select_button", "games_folder_select_file_dialog", "games_folder_label", "game_library", "menu_navigator", "game_library_display", "refresh_games_button", "bottom_border_file_dialog", "top_border_file_dialog", "right_border_file_dialog", "left_border_file_dialog")]
 visible = false
 layout_mode = 2
 theme = ExtResource("1_erdau")
@@ -521,6 +521,11 @@ game_library = NodePath("../../GameLibrary")
 menu_navigator = NodePath("../../MenuNavigator")
 game_library_display = NodePath("GameLibraryDisplay")
 refresh_games_button = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/RefreshGamesButton")
+bottom_border_file_dialog = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog/BottomBorderDialog")
+top_border_file_dialog = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog/TopBorderDialog")
+right_border_file_dialog = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog/RightBorderDialog")
+left_border_file_dialog = NodePath("VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog/LeftBorderDialog")
+file_dialog_pop_up_ratio = 0.93
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Menus/MainMenu"]
 custom_minimum_size = Vector2(500, 0)
@@ -595,14 +600,12 @@ file_mode = 2
 access = 2
 
 [node name="BottomBorderDialog" type="StaticBody2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog"]
-unique_name_in_owner = true
 position = Vector2(599, 638)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog/BottomBorderDialog"]
 shape = SubResource("WorldBoundaryShape2D_yc10j")
 
 [node name="TopBorderDialog" type="StaticBody2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog"]
-unique_name_in_owner = true
 position = Vector2(613, 514)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog/TopBorderDialog"]
@@ -611,7 +614,6 @@ rotation = 3.1415927
 shape = SubResource("WorldBoundaryShape2D_jscy8")
 
 [node name="RightBorderDialog" type="StaticBody2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog"]
-unique_name_in_owner = true
 position = Vector2(1115, 288)
 rotation = -1.5707964
 
@@ -619,7 +621,6 @@ rotation = -1.5707964
 shape = SubResource("WorldBoundaryShape2D_pm3ni")
 
 [node name="LeftBorderDialog" type="StaticBody2D" parent="Menus/MainMenu/VBoxContainer/PanelContainer/MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/GamesFolderSelectButton/GamesFolderSelectFileDialog"]
-unique_name_in_owner = true
 position = Vector2(-23, 282)
 rotation = 1.5707964
 

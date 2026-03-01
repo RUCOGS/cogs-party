@@ -11,6 +11,14 @@ extends HBoxContainer
 @export var game_library_display: GameLibraryDisplay
 @export var refresh_games_button: Button
 
+# World borders for file dialog cursors
+@export var bottom_border_file_dialog: StaticBody2D
+@export var top_border_file_dialog: StaticBody2D
+@export var right_border_file_dialog: StaticBody2D
+@export var left_border_file_dialog: StaticBody2D
+
+@export var file_dialog_pop_up_ratio: float
+
 const PREFERENCES_FILE_PATH = "user://preferences.json"
 
 var preferences: Dictionary = {
@@ -29,6 +37,7 @@ func _ready():
 	_on_visible_changed()
 	_load_preferences()	
 	_on_games_folder_selected(preferences.games_folder)
+	_resize_file_dialog_borders()
 
 
 func _save_preferences_file():
@@ -61,12 +70,27 @@ func _on_visible_changed():
 		pass # play_button.grab_focus()
 
 
+# correctly resizes the world borders for the file dialog depending on screen resolution
+func _resize_file_dialog_borders():
+	# temporarily pop it up to get size
+	games_folder_select_file_dialog.popup_centered_ratio(file_dialog_pop_up_ratio)
+	games_folder_select_file_dialog.visible = false
+	var viewport_size = get_viewport_rect().size
+	
+	# set borders to appropriate positions NOTE: might need to adjust these
+	print(get_viewport_rect().size)
+	bottom_border_file_dialog.position.y = viewport_size.y
+	top_border_file_dialog.position.y = 0
+	right_border_file_dialog.position.x = viewport_size.x
+	left_border_file_dialog.position.x = 0
+
+
 func _on_refresh_games_button_pressed():
 	_on_games_folder_selected(preferences.games_folder)
 
 
 func _on_games_folder_select_pressed():
-	games_folder_select_file_dialog.popup_centered_ratio(0.93)
+	games_folder_select_file_dialog.popup_centered_ratio(file_dialog_pop_up_ratio)
 	
 
 func _on_games_folder_selected(folder: String):
